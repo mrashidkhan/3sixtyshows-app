@@ -27,3 +27,8 @@ Thumbs.db
 /public/storage 
 /storage/*.key 
 .env 
+/vendor/ 
+/node_modules/ 
+/public/storage 
+/storage/logs/ 
+.env 
