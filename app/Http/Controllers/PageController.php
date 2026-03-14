@@ -245,20 +245,15 @@ class PageController extends Controller
 public function pastEvents(Request $request)
 {
     $query = \App\Models\Show::query()
-        ->where('is_active', true)   // FIX 1&4: must match showDetails() which also
-                                     // gates on is_active. Without this, inactive shows
-                                     // appear as cards but their detail page returns 404.
-        ->whereNotNull('slug')       // FIX 2: shows with a NULL slug produce a broken
-        ->where('slug', '!=', '')    //        URL — route('show.details', null) → 404.
+        ->whereNotNull('slug')
+        ->where('slug', '!=', '')
         ->where(function ($q) {
-            // A show is "past" when its start_date is before today
             $q->where('start_date', '<', now()->startOfDay())
               ->orWhere('status', 'completed');
         })
         ->with(['venue', 'ticketTypes'])
-        ->orderBy('start_date', 'desc'); // Most recent past events first
+        ->orderBy('start_date', 'desc');
 
-    // ── Search filters (mirrors events() method) ─────────────
     if ($request->filled('location')) {
         $location = $request->input('location');
         $query->whereHas('venue', function ($q) use ($location) {
@@ -288,7 +283,6 @@ public function pastEvents(Request $request)
 
     return view('pages.pastevents', compact('pastEvents'));
 }
-
 /**
  * GET /gallery
  *
@@ -447,7 +441,7 @@ public function showDetails(string $slug)
             'posters',
         ])
         ->where('slug', $slug)
-        ->where('is_active', true)
+        // ->where('is_active', true)
         ->firstOrFail();
 
     // ── Formatted date/time strings for the schedule block ───────

@@ -2971,15 +2971,6 @@ input[type="date"].mob-search-input {
     .btn-header { display: none !important; }
     .mobile-user-btn { display: flex !important; }
 
-    /* ── Login/Logout button — visible on mobile inside wrapper ── */
-    .btn-header-wrapper { display: inline-flex !important; }
-    .btn-header-wrapper .btn-header {
-        display: inline-flex !important;
-        padding: 7px 14px;
-        font-size: 11px;
-        margin-left: 0;
-    }
-
     /* ── HAMBURGER: visible on tablet ── */
     .mobile-toggle {
         display: flex !important;
@@ -3339,12 +3330,6 @@ border:0;
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    flex-shrink: 0;
-    margin-left: 12px;
-}
-
-.btn-header-wrapper .btn-header {
-    margin-left: 0;
 }
 
 .btn-header-username {

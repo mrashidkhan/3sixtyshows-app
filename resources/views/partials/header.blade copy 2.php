@@ -178,69 +178,8 @@
             margin: 4px 14px;
         }
 
-        /* ── Nav auth item — hidden on desktop, shown inside mobile slide-in nav ── */
-        .nav-auth-item { display: none; }
-
         /* ── 6. Mobile ≤ 992px ─────────────────────────────────────────────── */
         @media (max-width: 992px) {
-
-            /* ── Hide desktop Login/Logout button from header bar on mobile ── */
-            .btn-header-wrapper { display: none !important; }
-            .btn-header          { display: none !important; }
-
-            /* ── Show Login/Logout inside the slide-in hamburger nav panel ── */
-            .nav-auth-item {
-                display: block;
-                border-top: 1px solid rgba(255,255,255,0.08);
-                margin-top: 10px;
-                padding: 14px 0 4px;
-            }
-
-            .nav-auth-wrapper {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
-                padding: 0 28px;
-            }
-
-            .nav-auth-btn {
-                display: inline-flex;
-                align-items: center;
-                gap: 9px;
-                padding: 9px 20px;
-                border-radius: 50px;
-                background: linear-gradient(135deg, #C8102E 0%, #9b0c22 100%);
-                color: #fff !important;
-                font-family: var(--font-body, 'DM Sans', sans-serif);
-                font-weight: 700;
-                font-size: 13px;
-                letter-spacing: 0.5px;
-                text-transform: uppercase;
-                text-decoration: none;
-                box-shadow: 0 2px 12px rgba(200,16,46,0.4);
-                transition: all 0.2s ease;
-            }
-
-            .nav-auth-btn:hover {
-                background: linear-gradient(135deg, #e01535 0%, #C8102E 100%);
-                transform: translateY(-1px);
-                color: #fff !important;
-            }
-
-            .nav-auth-btn i { font-size: 15px; }
-
-            .nav-auth-username {
-                font-family: var(--font-body, 'DM Sans', sans-serif);
-                font-size: 12px;
-                font-weight: 600;
-                color: #ffffff;
-                padding-left: 4px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                max-width: 200px;
-            }
 
             .nav-submenu {
                 position: static;
@@ -333,7 +272,7 @@
          ═══════════════════════════════════════════════════════════════════ --}}
     <header class="header" id="header">
 
-        {{-- ── Row 1: Logo  |  Nav  |  Login/Logout (desktop)  |  Hamburger ── --}}
+        {{-- ── Row 1: Logo  |  Nav  |  Register  |  Hamburger ──────────── --}}
         <div class="header-nav-row">
             <div class="container">
                 <div class="header-content">
@@ -379,7 +318,7 @@
                             {{-- ── Gallery dropdown ──────────────────────────────────────
                                  • Parent link is highlighted whenever the user is anywhere
                                    under gallery.* or video-gallery.* routes.
-                                 • Desktop: hover opens the panel via JS mouseenter/mouseleave.
+                                 • Desktop: pure CSS :hover opens the panel.
                                  • Mobile (≤992px): JS toggles .open class on the <li>,
                                    which turns the submenu into an accordion panel.
                                  ────────────────────────────────────────────────────────── --}}
@@ -437,50 +376,33 @@
                                 </a>
                             </li>
 
-                            {{-- ── Mobile-only Login/Logout ──────────────────────────────
-                                 Hidden on desktop via .nav-auth-item { display: none }.
-                                 Shown on mobile (≤992px) at the bottom of the slide-in
-                                 hamburger panel, below Contact Us, above the panel bottom.
-                                 ────────────────────────────────────────────────────────── --}}
-                            <li class="nav-auth-item">
-                                @auth
-                                    <div class="nav-auth-wrapper">
-                                        <a href="{{ route('user_logout') }}" class="nav-auth-btn">
-                                            <i class="far fa-user-circle"></i>
-                                            Logout
-                                        </a>
-                                        <span class="nav-auth-username">{{ auth()->user()->name }}</span>
-                                    </div>
-                                @else
-                                    <a href="{{ route('user_login') }}" class="nav-auth-btn">
-                                        <i class="far fa-user-circle"></i>
-                                        Login
-                                    </a>
-                                @endauth
-                            </li>
-                            {{-- end Mobile Login/Logout --}}
-
                         </ul>
                     </nav>
                     {{-- end .nav --}}
 
-                    {{-- Desktop Login / Logout CTA (hidden on mobile via CSS) --}}
-                    @auth
-                        <div class="btn-header-wrapper">
-                            <a href="{{ route('user_logout') }}" class="btn-header">
-                                <i class="far fa-user-circle"></i>
-                                Logout
-                            </a>
-                            <span class="btn-header-username">
-                                {{ auth()->user()->name }}
-                            </span>
-                        </div>
-                    @else
-                        <a href="{{ route('user_login') }}" class="btn-header">
-                            <i class="far fa-user-circle"></i>
-                            Login
-                        </a>
-                    @endauth
+                    {{-- Register CTA --}}
+                    {{-- <a href="{{ route('user_login') }}" class="btn-header">
+                        <i class="far fa-user-circle"></i>
+                        Login
+                    </a> --}}
+
+                    {{-- Login / Logout CTA --}}
+@auth
+    <div class="btn-header-wrapper">
+        <a href="{{ route('user_logout') }}" class="btn-header">
+            <i class="far fa-user-circle"></i>
+            Logout
+        </a>
+        <span class="btn-header-username">
+            {{ auth()->user()->name }} 
+        </span>
+    </div>
+@else
+    <a href="{{ route('user_login') }}" class="btn-header">
+        <i class="far fa-user-circle"></i>
+        Login
+    </a>
+@endauth
 
                     {{-- Hamburger — shown at ≤992px via style.css §24 --}}
                     <button class="mobile-toggle"
@@ -635,7 +557,7 @@
          HEADER SCRIPTS
          Placed immediately after </header> so the DOM nodes are available.
          ═══════════════════════════════════════════════════════════════════ --}}
-    <script>
+        <script>
 
         /* ── Desktop search redirect ──────────────────────────────────────── */
         function handleSearch() {
@@ -768,7 +690,7 @@
                 });
 
                 /* Regular nav links close the slide-in panel */
-                nav.querySelectorAll('li:not(.nav-dropdown):not(.nav-auth-item) .nav-link').forEach(function (link) {
+                nav.querySelectorAll('li:not(.nav-dropdown) .nav-link').forEach(function (link) {
                     link.addEventListener('click', closeNav);
                 });
 
@@ -796,12 +718,10 @@
             var header = document.getElementById('header');
             if (header) {
                 window.addEventListener('scroll', function () {
-                    header.classList.toggle('scrolled', window.scrollY > 50);
-                });
+                    header.classList.toggle('header--scrolled', window.scrollY > 10);
+                }, { passive: true });
             }
 
         }); /* end DOMContentLoaded */
 
     </script>
-
-    @stack('scripts')

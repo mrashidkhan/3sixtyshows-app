@@ -127,79 +127,79 @@ class ShowController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $show = Show::findOrFail($id);
+{
+    $show = Show::findOrFail($id);
 
-        $validated = $request->validate([
-            'title'             => 'required|string|max:255',
-            'slug'              => 'required|string|max:255|unique:shows,slug,' . $id,
-            'category_id'       => 'required|exists:show_categories,id',
-            'venue_id'          => 'required|exists:venues,id',
-            'description'       => 'required|string',
-            'short_description' => 'required|string|max:500',
-            'featured_image'    => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'start_date'        => 'required|date',
-            'end_date'          => 'required|date|after_or_equal:start_date',
-            'price'             => 'required|numeric|min:0',
-            'available_tickets' => 'nullable|integer|min:0',
-            'is_featured'       => 'required|boolean',
-            'status'            => 'required|in:upcoming,ongoing,past,cancelled',
-            'performers'        => 'nullable|string',
-            'duration'          => 'nullable|string|max:50',
-            'age_restriction'   => 'nullable|string|max:50',
-            'is_active'         => 'required|boolean',
-            'redirect'          => 'boolean',
-            'redirect_url'      => 'nullable|url|required_if:redirect,1',
-        ]);
+    $validated = $request->validate([
+        'title'             => 'required|string|max:255',
+        'slug'              => 'required|string|max:255|unique:shows,slug,' . $id,
+        'category_id'       => 'required|exists:show_categories,id',
+        'venue_id'          => 'required|exists:venues,id',
+        'description'       => 'required|string',
+        'short_description' => 'required|string|max:500',
+        'featured_image'    => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        'start_date'        => 'required|date',
+        'end_date'          => 'required|date|after_or_equal:start_date',
+        'price'             => 'required|numeric|min:0',
+        'available_tickets' => 'nullable|integer|min:0',
+        'is_featured'       => 'required|boolean',
+        'status'            => 'required|in:upcoming,ongoing,past,cancelled',
+        'performers'        => 'nullable|string',
+        'duration'          => 'nullable|string|max:50',
+        'age_restriction'   => 'nullable|string|max:50',
+        'is_active'         => 'required|boolean',
+        'redirect'          => 'boolean',
+        'redirect_url'      => 'nullable|url|required_if:redirect,1',
+    ]);
 
-        // Handle additional_info JSON field
-        if ($request->has('additional_info_json')) {
-            $validated['additional_info'] = json_decode($request->additional_info_json, true);
-        } elseif ($request->has('additional_info')) {
-            $lines          = explode("\n", $request->additional_info);
-            $additionalInfo = [];
+    // Handle additional_info JSON field
+    if ($request->has('additional_info_json')) {
+        $validated['additional_info'] = json_decode($request->additional_info_json, true);
+    } elseif ($request->has('additional_info')) {
+        $lines          = explode("\n", $request->additional_info);
+        $additionalInfo = [];
 
-            foreach ($lines as $line) {
-                $parts = explode(':', $line, 2);
-                if (count($parts) === 2) {
-                    $key   = trim($parts[0]);
-                    $value = trim($parts[1]);
-                    if (!empty($key) && !empty($value)) {
-                        $additionalInfo[$key] = $value;
-                    }
+        foreach ($lines as $line) {
+            $parts = explode(':', $line, 2);
+            if (count($parts) === 2) {
+                $key   = trim($parts[0]);
+                $value = trim($parts[1]);
+                if (!empty($key) && !empty($value)) {
+                    $additionalInfo[$key] = $value;
                 }
             }
-
-            $validated['additional_info'] = $additionalInfo;
         }
 
-        // Handle image upload — store in storage/app/private/shows
-        if ($request->hasFile('featured_image')) {
-            // Delete old image from private storage
-            if ($show->featured_image) {
-                Storage::disk('local')->delete($show->featured_image);
-            }
-
-            $image    = $request->file('featured_image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $path     = $image->storeAs('shows', $filename, 'public');
-
-            $validated['featured_image'] = $path;
-        }
-
-        // Clear redirect URL if redirect is disabled
-        if (!$request->has('redirect') || !$request->redirect) {
-            $validated['redirect_url'] = null;
-        }
-
-        $show->update($validated);
-
-        // Update show status based on dates
-        $show->updateStatus();
-
-        return redirect()->route('show.index')
-                         ->with('success', 'Show updated successfully!');
+        $validated['additional_info'] = $additionalInfo;
     }
+
+    // Handle image upload
+    if ($request->hasFile('featured_image')) {
+        if ($show->featured_image) {
+            Storage::disk('public')->delete($show->featured_image);
+        }
+
+        $image    = $request->file('featured_image');
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $path     = $image->storeAs('shows', $filename, 'public');
+
+        $validated['featured_image'] = $path;
+    }
+
+    // Clear redirect URL if redirect is disabled
+    if (!$request->has('redirect') || !$request->redirect) {
+        $validated['redirect_url'] = null;
+    }
+
+    // Save all validated fields including the admin-selected status.
+    // updateStatus() is intentionally NOT called here — it would
+    // overwrite the admin's explicit status choice with a date-calculated
+    // value. Automated status updates belong in a scheduled job, not here.
+    $show->update($validated);
+
+    return redirect()->route('show.index')
+                     ->with('success', 'Show updated successfully!');
+}
 
     public function destroy($id)
     {
@@ -207,12 +207,12 @@ class ShowController extends Controller
 
         // Delete featured image from private storage
         if ($show->featured_image) {
-            Storage::disk('local')->delete($show->featured_image);
+            Storage::disk('public')->delete($show->featured_image);
         }
 
         // Delete associated gallery images
         foreach ($show->gallery as $galleryItem) {
-            Storage::disk('local')->delete($galleryItem->image);
+            Storage::disk('public')->delete($galleryItem->image);
             $galleryItem->delete();
         }
 
