@@ -10,9 +10,14 @@ class Ticket extends Model
     use HasFactory;
 
     protected $fillable = [
-    'show_id', 'user_id', 'booking_id', 'ticket_type_id', 'seat_id',  // REMOVED customer_id
+    'show_id', 'user_id', 'booking_id', 'ticket_type_id', 'seat_id',
     'ticket_number', 'price', 'status', 'seat_number', 'seat_identifier',
-    'purchased_date', 'qr_code', 'ticket_mode', 'ticket_metadata'
+    'purchased_date', 'qr_code', 'ticket_mode', 'ticket_metadata',
+    // seats.io fields
+    'seatsio_object_id',
+    'seat_section',
+    'seat_row',
+    'seat_label',
 ];
 
 
@@ -51,7 +56,7 @@ public function user()
         return $this->belongsTo(Show::class);
     }
 
-    
+
     public function booking()
     {
         return $this->belongsTo(Booking::class);

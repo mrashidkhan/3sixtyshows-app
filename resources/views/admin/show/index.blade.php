@@ -71,16 +71,16 @@
                                                         <label for="status">Status</label>
                                                         <select name="status" id="status" class="form-control form-control-sm">
                                                             <option value="">All Statuses</option>
-                                                            <option value="upcoming" {{ request('status') == 'upcoming' ? 'selected' : '' }}>Upcoming</option>
-                                                            <option value="ongoing" {{ request('status') == 'ongoing' ? 'selected' : '' }}>Ongoing</option>
-                                                            <option value="past" {{ request('status') == 'past' ? 'selected' : '' }}>Past</option>
+                                                            <option value="upcoming"  {{ request('status') == 'upcoming'  ? 'selected' : '' }}>Upcoming</option>
+                                                            <option value="ongoing"   {{ request('status') == 'ongoing'   ? 'selected' : '' }}>Ongoing</option>
+                                                            <option value="past"      {{ request('status') == 'past'      ? 'selected' : '' }}>Past</option>
                                                             <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label for="is_active">Active Status</label>
+                                                        <label for="is_active">Active</label>
                                                         <select name="is_active" id="is_active" class="form-control form-control-sm">
                                                             <option value="">All</option>
                                                             <option value="1" {{ request('is_active') == '1' ? 'selected' : '' }}>Active</option>
@@ -88,13 +88,16 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                                {{-- NEW: seats.io ticketing mode filter --}}
                                                 <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label for="redirect">Redirect</label>
-                                                        <select name="redirect" id="redirect" class="form-control form-control-sm">
-                                                            <option value="">All</option>
-                                                            <option value="1" {{ request('redirect') == '1' ? 'selected' : '' }}>With Redirect</option>
-                                                            <option value="0" {{ request('redirect') == '0' ? 'selected' : '' }}>No Redirect</option>
+                                                        <label for="ticketing_mode">Ticketing Mode</label>
+                                                        <select name="ticketing_mode" id="ticketing_mode" class="form-control form-control-sm">
+                                                            <option value="">All Modes</option>
+                                                            <option value="general_admission" {{ request('ticketing_mode') == 'general_admission' ? 'selected' : '' }}>General Admission</option>
+                                                            <option value="reserved"          {{ request('ticketing_mode') == 'reserved'          ? 'selected' : '' }}>Reserved (seats.io)</option>
+                                                            <option value="mixed"             {{ request('ticketing_mode') == 'mixed'             ? 'selected' : '' }}>Mixed (seats.io)</option>
+                                                            <option value="none"              {{ request('ticketing_mode') == 'none'              ? 'selected' : '' }}>None / External</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -115,7 +118,7 @@
                                                     </a>
                                                     <span class="ml-3 text-muted">
                                                         Showing {{ $shows->count() }} show(s)
-                                                        @if(request()->anyFilled(['category', 'venue', 'status', 'is_active', 'redirect', 'search']))
+                                                        @if(request()->anyFilled(['category', 'venue', 'status', 'is_active', 'ticketing_mode', 'search']))
                                                             (filtered)
                                                         @endif
                                                     </span>
@@ -132,16 +135,18 @@
                         <table class="table table-striped jambo_table bulk_action">
                             <thead>
                                 <tr class="headings">
-                                    <th class="column-title"><b>ID</b></th>
-                                    <th class="column-title"><b>Image</b></th>
-                                    <th class="column-title"><b>Title</b></th>
-                                    <th class="column-title"><b>Category</b></th>
-                                    <th class="column-title"><b>Venue</b></th>
-                                    <th class="column-title"><b>Date</b></th>
-                                    <th class="column-title"><b>Status</b></th>
-                                    <th class="column-title"><b>Price</b></th>
-                                    <th class="column-title"><b>Tickets</b></th>
-                                    <th class="column-title no-link last"><b>Actions</b></th>
+                                    <th><b>ID</b></th>
+                                    <th><b>Image</b></th>
+                                    <th><b>Title</b></th>
+                                    <th><b>Category</b></th>
+                                    <th><b>Venue</b></th>
+                                    <th><b>Date</b></th>
+                                    <th><b>Status</b></th>
+                                    <th><b>Price</b></th>
+                                    <th><b>Tickets</b></th>
+                                    {{-- NEW column --}}
+                                    <th><b>Ticketing</b></th>
+                                    <th class="no-link last"><b>Actions</b></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -167,24 +172,16 @@
                                             @endif
                                         </div>
                                     </td>
+                                    <td><span class="badge badge-light">{{ $show->category->name ?? 'None' }}</span></td>
+                                    <td><span class="badge badge-light">{{ $show->venue->name ?? 'None' }}</span></td>
                                     <td>
-                                        <span class="badge badge-light">
-                                            {{ $show->category->name ?? 'None' }}
-                                        </span>
+                                        <small>
+                                            <strong>Start:</strong> {{ $show->start_date->format('M d, Y H:i') }}<br>
+                                            @if($show->end_date)
+                                                <strong>End:</strong> {{ $show->end_date->format('M d, Y H:i') }}
+                                            @endif
+                                        </small>
                                     </td>
-                                    <td>
-                                        <span class="badge badge-light">
-                                            {{ $show->venue->name ?? 'None' }}
-                                        </span>
-                                    </td>
-                                    <td>
-    <small>
-        <strong>Start:</strong> {{ $show->start_date->format('M d, Y H:i') }}<br>
-        @if($show->end_date)
-            <strong>End:</strong> {{ $show->end_date->format('M d, Y H:i') }}
-        @endif
-    </small>
-</td>
                                     <td>
                                         <div>
                                             @if($show->status == 'upcoming')
@@ -205,9 +202,7 @@
                                             @endif
                                         </div>
                                     </td>
-                                    <td>
-                                        <strong>{{ $show->formatted_price }}</strong>
-                                    </td>
+                                    <td><strong>{{ $show->formatted_price }}</strong></td>
                                     <td>
                                         @if($show->available_tickets)
                                             <small>
@@ -222,6 +217,37 @@
                                             <span class="badge badge-info">Unlimited</span>
                                         @endif
                                     </td>
+                                    {{-- NEW: ticketing mode column --}}
+                                    <td>
+                                        @php $mode = $show->ticketing_mode ?? 'general_admission'; @endphp
+                                        @if($mode === 'reserved')
+                                            <span class="badge badge-purple" style="background:#6f42c1;color:#fff;" title="seats.io Reserved Seating">
+                                                <i class="fa fa-map-marker"></i> Reserved
+                                            </span>
+                                            @if($show->tickets_on_sale)
+                                                <br><span class="badge badge-success mt-1">On Sale</span>
+                                            @else
+                                                <br><span class="badge badge-secondary mt-1">Off Sale</span>
+                                            @endif
+                                        @elseif($mode === 'mixed')
+                                            <span class="badge" style="background:#17a2b8;color:#fff;" title="seats.io Mixed">
+                                                <i class="fa fa-th"></i> Mixed
+                                            </span>
+                                            @if($show->tickets_on_sale)
+                                                <br><span class="badge badge-success mt-1">On Sale</span>
+                                            @else
+                                                <br><span class="badge badge-secondary mt-1">Off Sale</span>
+                                            @endif
+                                        @elseif($mode === 'none')
+                                            <span class="badge badge-secondary">
+                                                <i class="fa fa-external-link"></i> External
+                                            </span>
+                                        @else
+                                            <span class="badge badge-light" style="border:1px solid #ccc;">
+                                                <i class="fa fa-ticket"></i> GA
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td class="last">
                                         <div class="btn-group">
                                             <a href="{{ route('show.edit', $show->id) }}" class="btn btn-info btn-sm" title="Edit">
@@ -230,7 +256,8 @@
                                             <a href="{{ route('shows.show', $show->id) }}" class="btn btn-primary btn-sm" title="View">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <form action="{{ route('show.delete', $show->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this show? This action cannot be undone.')">
+                                            <form action="{{ route('show.delete', $show->id) }}" method="POST" style="display: inline;"
+                                                  onsubmit="return confirm('Are you sure you want to delete this show? This action cannot be undone.')">
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete">
                                                     <i class="fa fa-trash"></i>
@@ -241,12 +268,12 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="10" class="text-center">
+                                    <td colspan="11" class="text-center">
                                         <div class="py-4">
                                             <i class="fa fa-calendar-times-o fa-3x text-muted mb-3"></i>
                                             <h5>No shows found</h5>
                                             <p class="text-muted">
-                                                @if(request()->anyFilled(['category', 'venue', 'status', 'is_active', 'redirect', 'search']))
+                                                @if(request()->anyFilled(['category', 'venue', 'status', 'is_active', 'ticketing_mode', 'search']))
                                                     Try adjusting your filters or <a href="{{ route('show.index') }}">clear all filters</a>
                                                 @else
                                                     <a href="{{ route('show.create') }}" class="btn btn-primary">Create your first show</a>
@@ -273,11 +300,10 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Auto-submit filter form when select fields change (optional)
+        // Auto-submit filter selects on change
         document.querySelectorAll('#filterForm select').forEach(function(select) {
             select.addEventListener('change', function() {
-                // Uncomment the line below if you want auto-submit on change
-                 this.form.submit();
+                this.form.submit();
             });
         });
 

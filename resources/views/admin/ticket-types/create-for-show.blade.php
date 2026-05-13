@@ -100,6 +100,24 @@
                     </div>
 
                     <div class="item form-group">
+    <label class="col-form-label col-md-3 col-sm-3 label-align" for="seatsio_category_key">
+        Seats.io Category Key
+    </label>
+    <div class="col-md-6 col-sm-6">
+        <input type="text" id="seatsio_category_key" name="seatsio_category_key"
+               class="form-control"
+               value="{{ old('seatsio_category_key') }}"
+               placeholder="e.g. vip, general, balcony">
+        <small class="form-text text-muted">
+            Must <strong>exactly</strong> match the category key in your
+            <strong>seats.io chart designer</strong>. Used to automatically
+            match seat selections to this ticket type and apply the correct price.
+            Leave empty if this show does not use reserved seating.
+        </small>
+    </div>
+</div>
+
+                    <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align">
                             Active Status
                         </label>

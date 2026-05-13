@@ -10,9 +10,10 @@ class BookingItem extends Model
     use HasFactory;
 
     protected $fillable = [
-        'booking_id', 'ticket_type_id', 'seat_id', 'general_admission_area_id',
-        'quantity', 'unit_price', 'total_price', 'seat_identifier', 'item_metadata'
-    ];
+    'booking_id', 'ticket_type_id', 'seat_id', 'general_admission_area_id',
+    'quantity', 'unit_price', 'total_price', 'seat_identifier', 'item_metadata',
+    'seatsio_object_id',  // seats.io seat label e.g. 'A-1', 'B-5'
+];
 
     protected $casts = [
         'unit_price' => 'decimal:2',

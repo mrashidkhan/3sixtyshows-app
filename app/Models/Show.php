@@ -19,18 +19,36 @@ class Show extends Model
         'short_description', 'featured_image', 'start_date', 'end_date',
         'price', 'available_tickets', 'is_featured', 'status',
         'performers', 'additional_info', 'duration', 'age_restriction', 'is_active',
-        'redirect', 'redirect_url' // New fields added
+        'redirect', 'redirect_url',
+        // seats.io fields (Migration 1)
+        'ticketing_mode', 'seatsio_chart_key', 'seatsio_event_key',
+        'seatsio_public_key', 'tickets_on_sale', 'sale_starts_at',
     ];
 
     protected $casts = [
         // 'performers' => 'array',
-        'additional_info' => 'array',
-        'start_date' => 'datetime',
-        'end_date' => 'datetime',
-        'is_featured' => 'boolean',
-        'is_active' => 'boolean',
-        'redirect' => 'boolean', // New field casting
+        'additional_info'  => 'array',
+        'start_date'       => 'datetime',
+        'end_date'         => 'datetime',
+        'is_featured'      => 'boolean',
+        'is_active'        => 'boolean',
+        'redirect'         => 'boolean',
+        // seats.io casts — ADDED
+        'tickets_on_sale'  => 'boolean',
+        'sale_starts_at'   => 'datetime',
     ];
+
+    // ------------------------------------------------------------------
+    // Ticketing mode constants (matches Migration 1 enum values)
+    // ------------------------------------------------------------------
+    const TICKETING_NONE               = 'none';
+    const TICKETING_GENERAL_ADMISSION  = 'general_admission';
+    const TICKETING_RESERVED           = 'reserved';
+    const TICKETING_MIXED              = 'mixed';
+
+    // ------------------------------------------------------------------
+    // Relationships
+    // ------------------------------------------------------------------
 
     public function category()
     {
@@ -52,89 +70,136 @@ class Show extends Model
         return $this->hasMany(Gallery::class);
     }
 
-    // One show has many bookings
     public function bookings()
     {
         return $this->hasMany(Booking::class);
     }
 
-    // One show has many posters
     public function posters()
     {
         return $this->hasMany(Poster::class);
     }
 
-    // One show has many photos
     public function photos()
     {
         return $this->hasMany(PhotoGallery::class);
     }
 
-    // One show has many videos
     public function videos()
     {
         return $this->hasMany(VideoGallery::class);
     }
 
+    public function seatReservations()
+    {
+        return $this->hasMany(SeatReservation::class);
+    }
 
-/**
- * Get active ticket types for this show
- */
-// public function activeTicketTypes()
-// {
-//     return $this->hasMany(TicketType::class)->active()->ordered();
-// }
+    public function ticketTypes()
+    {
+        return $this->hasMany(TicketType::class)
+                    ->orderBy('display_order', 'asc')
+                    ->orderBy('name', 'asc');
+    }
 
-/**
- * Check if show has any ticket types
- */
-public function hasTicketTypes()
-{
-    return $this->ticketTypes()->count() > 0;
-}
+    public function activeTicketTypes()
+    {
+        return $this->hasMany(TicketType::class)
+                    ->where('is_active', true)
+                    ->orderBy('display_order', 'asc')
+                    ->orderBy('name', 'asc');
+    }
 
-/**
- * Check if show has any active ticket types
- */
-public function hasActiveTicketTypes()
-{
-    return $this->activeTicketTypes()->count() > 0;
-}
+    // ------------------------------------------------------------------
+    // seats.io helper methods
+    // ------------------------------------------------------------------
 
+    /**
+     * Returns true if this show uses seats.io for any ticketing mode
+     * (reserved or mixed). GA-only shows do NOT need the seats.io widget.
+     */
+    public function usesSeatsIo(): bool
+    {
+        return in_array($this->ticketing_mode, [
+            self::TICKETING_RESERVED,
+            self::TICKETING_MIXED,
+        ]);
+    }
 
-    // Get sold tickets count
+    /**
+     * Returns the effective seats.io public key for this show.
+     * Falls back to the global .env key if no per-show override is set.
+     */
+    public function getSeatsioPublicKeyAttribute($value): string
+    {
+        return $value ?: config('services.seatsio.public_key', '');
+    }
+
+    /**
+     * Whether ticket sales are currently open for this show.
+     */
+    public function isSaleOpen(): bool
+    {
+        if (!$this->tickets_on_sale) {
+            return false;
+        }
+        if ($this->sale_starts_at && $this->sale_starts_at->isFuture()) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Whether the show is fully configured for seats.io reserved seating.
+     */
+    public function isSeatsIoReady(): bool
+    {
+        return $this->usesSeatsIo()
+            && !empty($this->seatsio_chart_key)
+            && !empty($this->seatsio_event_key);
+    }
+
+    // ------------------------------------------------------------------
+    // Existing methods (unchanged)
+    // ------------------------------------------------------------------
+
+    public function hasTicketTypes(): bool
+    {
+        return $this->ticketTypes()->count() > 0;
+    }
+
+    public function hasActiveTicketTypes(): bool
+    {
+        return $this->activeTicketTypes()->count() > 0;
+    }
+
     public function getSoldTicketsAttribute()
     {
         return $this->bookings()->where('status', 'confirmed')->sum('number_of_tickets');
     }
 
-    // Check if show is sold out
     public function getSoldOutAttribute()
     {
         if ($this->available_tickets === null) {
             return false;
         }
-
         return $this->sold_tickets >= $this->available_tickets;
     }
 
-    // Get formatted price
     public function getFormattedPriceAttribute()
     {
         if ($this->price === null || $this->price == 0) {
             return 'Free';
         }
-
         return '$' . number_format($this->price, 2);
     }
 
-    // Get show status based on dates
     public function updateStatus()
     {
         $now = Carbon::now();
 
         if ($this->status === 'cancelled') {
-            return; // Keep cancelled status
+            return;
         }
 
         if ($this->end_date && $now > $this->end_date) {
@@ -148,7 +213,6 @@ public function hasActiveTicketTypes()
         $this->save();
     }
 
-    // Auto-generate slug from title
     protected static function boot()
     {
         parent::boot();
@@ -165,46 +229,18 @@ public function hasActiveTicketTypes()
     }
 
     // Scopes
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', true);
-    }
+    public function scopeActive($query)       { return $query->where('is_active', true); }
+    public function scopeFeatured($query)     { return $query->where('is_featured', true); }
+    public function scopeUpcoming($query)     { return $query->where('status', 'upcoming'); }
+    public function scopePast($query)         { return $query->where('status', 'past'); }
+    public function scopeOngoing($query)      { return $query->where('status', 'ongoing'); }
 
-    public function scopeFeatured($query)
-    {
-        return $query->where('is_featured', true);
-    }
-
-    public function scopeUpcoming($query)
-    {
-        return $query->where('status', 'upcoming');
-    }
-
-    public function scopePast($query)
-    {
-        return $query->where('status', 'past');
-    }
-
-    public function scopeOngoing($query)
-    {
-        return $query->where('status', 'ongoing');
-    }
-
-    // A show has many seat reservations
-    public function seatReservations()
-    {
-        return $this->hasMany(SeatReservation::class);
-    }
-
-    // Get available seats for this show
     public function getAvailableSeatsAttribute()
     {
-        // Get all seat IDs that are reserved for this show
         $reservedSeatIds = $this->seatReservations()
             ->whereIn('status', ['booked', 'reserved'])
             ->pluck('seat_id');
 
-        // Get venue's seats excluding the reserved ones
         return Seat::where('venue_id', $this->venue_id)
             ->where('is_active', true)
             ->whereNotIn('id', $reservedSeatIds)
@@ -212,106 +248,59 @@ public function hasActiveTicketTypes()
     }
 
     public function getAvailableTicketTypes()
-{
-    return $this->ticketTypes()
-        ->where('is_active', true)
-        ->orderBy('display_order')
-        ->get();
-}
-
-public function getAvailableCapacityForTicketType($ticketTypeId)
-{
-    $ticketType = $this->ticketTypes()->find($ticketTypeId);
-    if (!$ticketType) {
-        return 0;
+    {
+        return $this->ticketTypes()->where('is_active', true)->orderBy('display_order')->get();
     }
 
-    // If no capacity limit set, return large number
-    if (!$ticketType->capacity) {
-        return 999;
+    public function getAvailableCapacityForTicketType($ticketTypeId)
+    {
+        $ticketType = $this->ticketTypes()->find($ticketTypeId);
+        if (!$ticketType) return 0;
+        if (!$ticketType->capacity) return 999;
+
+        $sold = BookingItem::whereHas('booking', function ($query) {
+            $query->where('show_id', $this->id)->where('status', 'confirmed');
+        })->where('ticket_type_id', $ticketTypeId)->sum('quantity');
+
+        $held = TicketHold::where('show_id', $this->id)
+            ->where('ticket_type_id', $ticketTypeId)
+            ->where('expires_at', '>', now())
+            ->sum('quantity');
+
+        return max(0, $ticketType->capacity - $sold - $held);
     }
 
-    // Count sold tickets
-    $sold = BookingItem::whereHas('booking', function ($query) {
-        $query->where('show_id', $this->id)
-              ->where('status', 'confirmed');
-    })->where('ticket_type_id', $ticketTypeId)
-      ->sum('quantity');
+    public function getTotalSoldTickets()
+    {
+        return BookingItem::whereHas('booking', function ($query) {
+            $query->where('show_id', $this->id)->where('status', 'confirmed');
+        })->sum('quantity');
+    }
 
-    // Count held tickets (temporary reservations)
-    $held = TicketHold::where('show_id', $this->id)
-        ->where('ticket_type_id', $ticketTypeId)
-        ->where('expires_at', '>', now())
-        ->sum('quantity');
-
-    return max(0, $ticketType->capacity - $sold - $held);
-}
-
-public function getTotalSoldTickets()
-{
-    return BookingItem::whereHas('booking', function ($query) {
-        $query->where('show_id', $this->id)
-              ->where('status', 'confirmed');
-    })->sum('quantity');
-}
-
-// Check if show has available tickets
-public function hasAvailableTickets()
-{
-    foreach ($this->getAvailableTicketTypes() as $ticketType) {
-        if ($this->getAvailableCapacityForTicketType($ticketType->id) > 0) {
-            return true;
+    public function hasAvailableTickets()
+    {
+        foreach ($this->getAvailableTicketTypes() as $ticketType) {
+            if ($this->getAvailableCapacityForTicketType($ticketType->id) > 0) {
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-}
 
-// Add these methods to your Show.php model
+    public function getTotalCapacityAttribute()
+    {
+        return $this->ticketTypes()->sum('capacity') ?: null;
+    }
 
-/**
- * A show has many ticket types
- */
-public function ticketTypes()
-{
-    return $this->hasMany(TicketType::class)->orderBy('display_order', 'asc')->orderBy('name', 'asc');
-}
+    public function getTotalSoldTicketsAttribute()
+    {
+        return $this->ticketTypes()->withCount('tickets')->get()->sum('tickets_count');
+    }
 
-/**
- * Get active ticket types for this show
- */
-public function activeTicketTypes()
-{
-    return $this->hasMany(TicketType::class)
-                ->where('is_active', true)
-                ->orderBy('display_order', 'asc')
-                ->orderBy('name', 'asc');
-}
-
-
-/**
- * Get total capacity for all ticket types
- */
-public function getTotalCapacityAttribute()
-{
-    return $this->ticketTypes()->sum('capacity') ?: null;
-}
-
-/**
- * Get total sold tickets across all ticket types
- */
-public function getTotalSoldTicketsAttribute()
-{
-    return $this->ticketTypes()->withCount('tickets')->get()->sum('tickets_count');
-}
-
-/**
- * Check if any ticket type is sold out
- */
-public function hasAnySoldOutTicketTypes()
-{
-    return $this->ticketTypes()->get()->contains(function($ticketType) {
-        return $ticketType->capacity && $ticketType->tickets()->count() >= $ticketType->capacity;
-    });
-}
-
+    public function hasAnySoldOutTicketTypes()
+    {
+        return $this->ticketTypes()->get()->contains(function ($ticketType) {
+            return $ticketType->capacity && $ticketType->tickets()->count() >= $ticketType->capacity;
+        });
+    }
 }

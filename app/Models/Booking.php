@@ -11,11 +11,14 @@ class Booking extends Model
     'user_id', 'show_id', 'booking_number', 'total_amount', 'status',
     'payment_status', 'payment_method', 'payment_reference',
     'booking_date', 'expires_at', 'confirmed_at', 'number_of_tickets',
-    'transaction_id', 'ticket_breakdown', 'service_fee', 'processing_fee', 
+    'transaction_id', 'ticket_breakdown', 'service_fee', 'processing_fee',
     'grand_total', 'card_last_four', 'card_type',
     // ADD THESE MISSING FIELDS:
     'customer_name', 'customer_email', 'customer_phone',
-    'paypal_payer_id', 'paid_at'
+    'paypal_payer_id', 'paid_at',
+    // seats.io fields
+    'seatsio_hold_token',
+    'seatsio_order_id',
 ];
 
 // Also update the casts array:

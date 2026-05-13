@@ -87,7 +87,7 @@
           <!-- Logo -->
           <div class="footer-logo-section">
             <a href="{{ url('/') }}" class="logo">
-              <img src="{{ asset('assets/images/logos/logo.jpg') }}" alt="3Sixtyshows" />
+              <img src="{{ asset('assets/images/logos/logo.png') }}" alt="3Sixtyshows" />
             </a>
           </div>
 

@@ -1,0 +1,16 @@
+{
+    "name": "3SixtyShows",
+    "short_name": "3Sixty",
+    "description": "Bollywood & South Asian Events",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "icons": [
+        {
+            "src": "/favicon.ico",
+            "sizes": "any",
+            "type": "image/x-icon"
+        }
+    ]
+}

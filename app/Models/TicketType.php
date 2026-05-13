@@ -16,29 +16,35 @@ class TicketType extends Model
         'price',
         'capacity',
         'is_active',
-        'display_order'
+        'display_order',
+        'seatsio_category_key',
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
-        'price' => 'decimal:2',
-        'capacity' => 'integer',
+        'is_active'     => 'boolean',
+        'price'         => 'decimal:2',
+        'capacity'      => 'integer',
         'display_order' => 'integer',
     ];
 
-    // A ticket type belongs to a show
+    // -------------------------------------------------------------------------
+    // Relationships
+    // -------------------------------------------------------------------------
+
     public function show()
     {
         return $this->belongsTo(Show::class);
     }
 
-    // A ticket type has many tickets
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
     }
 
-    // Accessor for formatted price
+    // -------------------------------------------------------------------------
+    // Accessors
+    // -------------------------------------------------------------------------
+
     public function getFormattedPriceAttribute()
     {
         if ($this->price == 0) {
@@ -47,52 +53,66 @@ class TicketType extends Model
         return '$' . number_format($this->price, 2);
     }
 
-    // Accessor for available tickets count
     public function getAvailableTicketsAttribute()
     {
         if (!$this->capacity) {
             return null; // Unlimited
         }
-
-        $soldTickets = $this->tickets()->count();
-        return max(0, $this->capacity - $soldTickets);
+        return max(0, $this->capacity - $this->tickets()->count());
     }
 
-    // Accessor for sold tickets count
     public function getSoldTicketsAttribute()
     {
         return $this->tickets()->count();
     }
 
-    // Check if ticket type is sold out
     public function getIsSoldOutAttribute()
     {
         if (!$this->capacity) {
-            return false; // Unlimited capacity can't be sold out
+            return false;
         }
-
         return $this->sold_tickets >= $this->capacity;
     }
 
-    // Scope for active ticket types
+    /**
+     * Whether this ticket type has a seats.io category key configured.
+     */
+    public function getHasSeatsioCategoryAttribute(): bool
+    {
+        return !empty($this->seatsio_category_key);
+    }
+
+    // -------------------------------------------------------------------------
+    // Scopes
+    // -------------------------------------------------------------------------
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
     }
 
-    // Scope for ordering by display order
     public function scopeOrdered($query)
     {
         return $query->orderBy('display_order', 'asc')->orderBy('name', 'asc');
     }
 
-    // Check if tickets are still available
+    /**
+     * Only ticket types that are linked to a seats.io category.
+     */
+    public function scopeWithSeatsioCategory($query)
+    {
+        return $query->whereNotNull('seatsio_category_key')->where('seatsio_category_key', '!=', '');
+    }
+
+    // -------------------------------------------------------------------------
+    // Helpers
+    // -------------------------------------------------------------------------
+
     public function hasAvailableTickets($quantity = 1)
     {
         if (!$this->capacity) {
-            return true; // Unlimited capacity
+            return true;
         }
-
         return $this->available_tickets >= $quantity;
     }
 }

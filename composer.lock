@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c514d8f7b9fc5970bdd94287905ef584",
+    "content-hash": "7bce0c560e2d2b9dc8e510cdf8b01f32",
     "packages": [
         {
             "name": "brick/math",
@@ -1051,6 +1051,68 @@
                 }
             ],
             "time": "2025-08-22T14:27:06+00:00"
+        },
+        {
+            "name": "halaxa/json-machine",
+            "version": "1.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/halaxa/json-machine.git",
+                "reference": "8bf0b0ff6ff60ab480778eaa5ad7d505b442c2d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/halaxa/json-machine/zipball/8bf0b0ff6ff60ab480778eaa5ad7d505b442c2d4",
+                "reference": "8bf0b0ff6ff60ab480778eaa5ad7d505b442c2d4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "7.2 - 8.5"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^8.0"
+            },
+            "suggest": {
+                "ext-json": "To run JSON Machine out of the box without custom decoders.",
+                "guzzlehttp/guzzle": "To run example with GuzzleHttp"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "JsonMachine\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "src/autoloader.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Filip Halaxa",
+                    "email": "filip@halaxa.cz"
+                }
+            ],
+            "description": "Efficient, easy-to-use and fast JSON pull parser",
+            "support": {
+                "issues": "https://github.com/halaxa/json-machine/issues",
+                "source": "https://github.com/halaxa/json-machine/tree/1.2.6"
+            },
+            "funding": [
+                {
+                    "url": "https://ko-fi.com/G2G57KTE4",
+                    "type": "other"
+                }
+            ],
+            "time": "2025-12-05T14:53:09+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2228,6 +2290,57 @@
             "time": "2026-01-29T09:26:29+00:00"
         },
         {
+            "name": "netresearch/jsonmapper",
+            "version": "v5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cweiske/jsonmapper.git",
+                "reference": "8c64d8d444a5d764c641ebe97e0e3bc72b25bf6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cweiske/jsonmapper/zipball/8c64d8d444a5d764c641ebe97e0e3bc72b25bf6c",
+                "reference": "8c64d8d444a5d764c641ebe97e0e3bc72b25bf6c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-pcre": "*",
+                "ext-reflection": "*",
+                "ext-spl": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~7.5 || ~8.0 || ~9.0 || ~10.0",
+                "squizlabs/php_codesniffer": "~3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JsonMapper": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Weiske",
+                    "email": "cweiske@cweiske.de",
+                    "homepage": "http://github.com/cweiske/jsonmapper/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Map nested JSON structures onto PHP classes",
+            "support": {
+                "email": "cweiske@cweiske.de",
+                "issues": "https://github.com/cweiske/jsonmapper/issues",
+                "source": "https://github.com/cweiske/jsonmapper/tree/v5.0.0"
+            },
+            "time": "2024-09-08T10:20:00+00:00"
+        },
+        {
             "name": "nette/schema",
             "version": "v1.3.4",
             "source": {
@@ -3291,6 +3404,48 @@
                 "source": "https://github.com/ramsey/uuid/tree/4.9.2"
             },
             "time": "2025-12-14T04:43:48+00:00"
+        },
+        {
+            "name": "seatsio/seatsio-php",
+            "version": "v98.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/seatsio/seatsio-php.git",
+                "reference": "da19bfb85836e4cbc0f7c219705451439a62701b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/seatsio/seatsio-php/zipball/da19bfb85836e4cbc0f7c219705451439a62701b",
+                "reference": "da19bfb85836e4cbc0f7c219705451439a62701b",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "7.10.0",
+                "guzzlehttp/uri-template": "v1.0.5",
+                "halaxa/json-machine": "1.2.6",
+                "netresearch/jsonmapper": "5.0.0",
+                "php": ">=8.3.0"
+            },
+            "require-dev": {
+                "brianium/paratest": "v7.16.1",
+                "phpunit/phpunit": "12.5.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Seatsio\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A PHP client for the seats.io API",
+            "support": {
+                "issues": "https://github.com/seatsio/seatsio-php/issues",
+                "source": "https://github.com/seatsio/seatsio-php/tree/v98.5.0"
+            },
+            "time": "2026-02-06T10:30:04+00:00"
         },
         {
             "name": "symfony/clock",

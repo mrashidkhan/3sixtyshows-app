@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     {{-- App Stylesheet --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" /> --}}
+    @stack('early_styles')
+<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
 
     {{-- Favicon --}}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicon_io/apple-touch-icon.png') }}" />
@@ -290,6 +292,10 @@
     </style>
 
     @stack('styles')
+
+    {{-- Page-specific scripts that must load in <head> (e.g. seats.io chart.js) --}}
+    @stack('head_scripts')
+
 </head>
 <body>
 
@@ -340,7 +346,7 @@
 
                     {{-- Logo --}}
                     <a href="{{ url('/') }}" class="logo">
-                        <img src="{{ asset('assets/images/logos/logo.jpg') }}"
+                        <img src="{{ asset('assets/images/logos/logo.png') }}"
                              alt="3Sixtyshows — Premier Bollywood Events in Texas" />
                     </a>
 

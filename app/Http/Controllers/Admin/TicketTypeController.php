@@ -67,20 +67,21 @@ class TicketTypeController extends Controller
      * Display ticket types for a specific show
      */
     public function index(Show $show)
-    {
-        try {
-            $ticketTypes = $show->ticketTypes()
-                               ->orderBy('display_order', 'asc')
-                               ->orderBy('name', 'asc')
-                               ->get();
+{
+    try {
+        $ticketTypes = $show->ticketTypes()
+                           ->orderBy('display_order', 'asc')
+                           ->orderBy('name', 'asc')
+                           ->get();
 
-            return view('admin.ticket-types.index', compact('show', 'ticketTypes'));
+        return view('admin.ticket-types.index', compact('show', 'ticketTypes'));
 
-        } catch (\Exception $e) {
-            Log::error('Error in TicketTypeController@index: ' . $e->getMessage());
-            return redirect()->route('show.index')->with('error', 'Failed to load ticket types for this show.');
-        }
+    } catch (\Exception $e) {
+        Log::error('Error in TicketTypeController@index: ' . $e->getMessage());
+        return redirect()->route('show.index')
+                       ->with('error', 'Failed to load ticket types for this show.');
     }
+}
 
 
 
@@ -121,6 +122,7 @@ class TicketTypeController extends Controller
             'capacity' => 'nullable|integer|min:1',
             'display_order' => 'nullable|integer|min:0',
             'is_active' => 'required|boolean',
+             'seatsio_category_key'  => 'nullable|string|max:255',  // ← add this
         ]);
 
         // Check if reducing capacity below sold tickets
@@ -144,6 +146,8 @@ class TicketTypeController extends Controller
                 'capacity' => $validated['capacity'] ?? null,
                 'display_order' => $validated['display_order'] ?? 0,
                 'is_active' => $validated['is_active'],
+                'seatsio_category_key' => $validated['seatsio_category_key'] ?? null,  // ← add this
+
             ]);
 
             DB::commit();
@@ -478,13 +482,9 @@ class TicketTypeController extends Controller
     }
 
 
-/**
- * Show the form for creating a new ticket type (NEW - without show parameter)
- */
 public function create()
 {
     try {
-        // Get all active shows for selection
         $shows = Show::where('is_active', true)
                     ->orderBy('start_date', 'desc')
                     ->get(['id', 'title', 'start_date', 'venue_id'])
@@ -512,6 +512,7 @@ public function store(Request $request)
         'capacity' => 'nullable|integer|min:1',
         'display_order' => 'nullable|integer|min:0',
         'is_active' => 'nullable|boolean',
+         'seatsio_category_key'  => 'nullable|string|max:255',  // ← add this
     ]);
 
     DB::beginTransaction();
@@ -526,6 +527,7 @@ public function store(Request $request)
             'capacity' => $validated['capacity'] ?? null,
             'display_order' => $validated['display_order'] ?? 0,
             'is_active' => $request->has('is_active') ? true : false,
+             'seatsio_category_key' => $validated['seatsio_category_key'] ?? null,  // ← add this
         ]);
 
         DB::commit();
@@ -621,6 +623,7 @@ public function storeForShow(Request $request, Show $show)
         'capacity' => 'nullable|integer|min:1',
         'display_order' => 'nullable|integer|min:0',
         'is_active' => 'nullable|boolean',
+        'seatsio_category_key' => 'nullable|string|max:255',  // ← add this
     ]);
 
     DB::beginTransaction();
@@ -633,6 +636,7 @@ public function storeForShow(Request $request, Show $show)
             'capacity' => $validated['capacity'] ?? null,
             'display_order' => $validated['display_order'] ?? 0,
             'is_active' => $request->has('is_active') ? true : false,
+            'seatsio_category_key' => $validated['seatsio_category_key'] ?? null,  // ← add this
         ]);
 
         DB::commit();

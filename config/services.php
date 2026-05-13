@@ -35,4 +35,23 @@ return [
         ],
     ],
 
+    // -------------------------------------------------------------------------
+    // seats.io — ADD THIS BLOCK
+    // -------------------------------------------------------------------------
+    'seatsio' => [
+        'secret_key'     => env('SEATSIO_SECRET_KEY'),      // server-side only
+        'public_key'     => env('SEATSIO_PUBLIC_KEY'),      // passed to JS widget
+        'region'         => env('SEATSIO_REGION', 'na'),    // 'na' or 'eu'
+        'webhook_secret' => env('SEATSIO_WEBHOOK_SECRET'),  // set after enabling webhook in dashboard
+    ],
+
+    // -------------------------------------------------------------------------
+    // PayPal (existing — shown for reference only)
+    // -------------------------------------------------------------------------
+    // 'paypal' => [
+    //     'client_id'     => env('PAYPAL_CLIENT_ID'),
+    //     'client_secret' => env('PAYPAL_CLIENT_SECRET'),
+    //     'mode'          => env('PAYPAL_MODE', 'sandbox'),
+    // ],
+
 ];

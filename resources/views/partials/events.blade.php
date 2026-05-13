@@ -64,6 +64,9 @@
                     $isToday  = $daysLeft === 0;
                     $isUrgent = $daysLeft > 0 && $daysLeft <= 7;
                     $isPast   = $daysLeft < 0;
+
+                    // Hide date if more than 50 years in the future (TBA / placeholder dates)
+                    $showDate = $startDt->lte(\Carbon\Carbon::now()->addYears(50));
                 @endphp
 
                 <div class="otc-card">
@@ -74,9 +77,11 @@
 
                         {{-- ① DARK TOP BAR --}}
                         <div class="otc-topbar">
+                            @if($showDate)
                             <span class="otc-topbar__date">
-                                {{ \Carbon\Carbon::parse($show->start_date)->format('Y M d') }}
+                                {{ \Carbon\Carbon::parse($show->start_date)->format('M d Y') }}
                             </span>
+                            @endif
                             <span class="otc-topbar__icon">
                                 <i class="fas {{ $isExternal ? 'fa-sync-alt' : 'fa-ticket-alt' }}"></i>
                             </span>
@@ -112,13 +117,13 @@
                             @if($show->venue)
                                 <p class="otc-body__venue">
                                     <i class="fas fa-map-marker-alt"></i>
-                                    <span>{{ $show->venue->name }}@if($show->venue->city), {{ $show->venue->city }}@endif</span>
+                                    <span>{{ $show->venue->name }}@if($show->venue->city && strtolower(trim($show->venue->city)) !== strtolower(trim($show->venue->name))), {{ $show->venue->city }}@endif</span>
                                 </p>
                             @endif
 
                             <hr class="otc-body__hr" />
 
-                            @if($minPrice !== null)
+                            {{-- @if($minPrice !== null)
                                 <div class="otc-price">
                                     <span class="otc-price__label">Starts</span>
                                     <span class="otc-price__amount">{{ number_format($minPrice, 2) }}</span>
@@ -127,19 +132,27 @@
                                     @endif
                                     <span class="otc-price__currency">USD</span>
                                 </div>
-                            @endif
+                            @endif --}}
 
                             @if(!$isPast)
-                                <div class="otc-cd {{ $isUrgent ? 'otc-cd--urgent' : '' }} {{ $isToday ? 'otc-cd--today' : '' }}">
-                                    <span class="otc-cd__dot {{ $isToday ? 'otc-cd__dot--green' : ($isUrgent ? 'otc-cd__dot--red' : 'otc-cd__dot--grey') }}"></span>
-                                    @if($isToday)
-                                        <span>On Today</span>
-                                    @elseif($isUrgent)
-                                        <span>Sale Ends In &nbsp;<strong>{{ $daysLeft }} Day{{ $daysLeft === 1 ? '' : 's' }}</strong></span>
-                                    @else
-                                        <span><strong>{{ $daysLeft }}</strong> Day{{ $daysLeft === 1 ? '' : 's' }} Away</span>
-                                    @endif
-                                </div>
+                                @if(!$showDate)
+                                    {{-- Date is a placeholder (50+ years ahead) — show TBA message --}}
+                                    <div class="otc-cd otc-cd--tba">
+                                        <span class="otc-cd__dot otc-cd__dot--grey"></span>
+                                        <span><i class="far fa-calendar-times" style="margin-right:4px;"></i>Date will be announced soon</span>
+                                    </div>
+                                @else
+                                    <div class="otc-cd {{ $isUrgent ? 'otc-cd--urgent' : '' }} {{ $isToday ? 'otc-cd--today' : '' }}">
+                                        <span class="otc-cd__dot {{ $isToday ? 'otc-cd__dot--green' : ($isUrgent ? 'otc-cd__dot--red' : 'otc-cd__dot--grey') }}"></span>
+                                        @if($isToday)
+                                            <span>On Today</span>
+                                        @elseif($isUrgent)
+                                            <span>Sale Ends In &nbsp;<strong>{{ $daysLeft }} Day{{ $daysLeft === 1 ? '' : 's' }}</strong></span>
+                                        @else
+                                            <span><strong>{{ $daysLeft }}</strong> Day{{ $daysLeft === 1 ? '' : 's' }} Away</span>
+                                        @endif
+                                    </div>
+                                @endif
                             @endif
 
                         </div>{{-- /.otc-body --}}
@@ -421,6 +434,8 @@
 }
 
 .otc-cd__dot--grey { background: #D1D5DB; }
+
+.otc-cd--tba { color: #9CA3AF; font-style: italic; }
 
 @keyframes otc-pulse {
     0%,100% { box-shadow: 0 0 0 3px rgba(239,68,68,.22); }
