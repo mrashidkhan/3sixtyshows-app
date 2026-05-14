@@ -41,7 +41,7 @@
 /* ============================================================
    02. GOOGLE FONTS IMPORT
    ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
 
 /* ============================================================
@@ -49,40 +49,55 @@
    ============================================================ */
 :root {
     /* ── Brand Colors ── */
-    --color-crimson:       #C8102E;   /* Primary brand red (from logo) */
-    --color-crimson-dark:  #9e0b22;
-    --color-crimson-light: #e63355;
-    --color-crimson-glow:  rgba(200, 16, 46, 0.18);
+    --color-crimson:       #E63946;
+    --color-crimson-dark:  #c1121f;
+    --color-crimson-light: #ff6b6b;
+    --color-crimson-glow:  rgba(230, 57, 70, 0.15);
 
-    --color-onyx:          #120A14;   /* Rich velvet — base page background */
-    --color-obsidian:      #1A0F1E;   /* Section alt background */
-    --color-charcoal:      #1C0F20;   /* Card / panel background */
-    --color-graphite:      #2A1530;   /* Borders */
-    --color-smoke:         #3D2248;   /* Subtle borders / hover states */
+    /* ── Dark (Header / Footer / Hero only) ── */
+    --color-onyx:          #1A1A2E;
+    --color-obsidian:      #16213E;
+    --color-charcoal:      #0F3460;
+    --color-graphite:      #E9ECEF;
+    --color-smoke:         #DEE2E6;
 
-    --color-gold:          #D4A017;   /* Accent gold — Bollywood shimmer */
-    --color-gold-light:    #F0C040;
-    --color-gold-glow:     rgba(212, 160, 23, 0.15);
+    /* ── Light Theme — Page & Sections ── */
+    --color-page-bg:       #FFFFFF;
+    --color-section-alt:   #F8F9FA;
+    --color-section-deep:  #F0F2F5;
+    --color-card-bg:       #FFFFFF;
+    --color-card-border:   #E9ECEF;
+    --color-input-bg:      #F8F9FA;
+    --color-input-border:  #CED4DA;
 
+    /* ── Gold / Amber ── */
+    --color-gold:          #F4A261;
+    --color-gold-light:    #E9C46A;
+    --color-gold-dark:     #E76F51;
+    --color-gold-glow:     rgba(244, 162, 97, 0.20);
+
+    /* ── Text ── */
     --color-white:         #FFFFFF;
-    --color-off-white:     #F5F3EE;   /* Warm parchment tint */
-    --color-light-grey:    #F0EDE8;
-    --color-mid-grey:      #8A8480;
-    --color-text-dark:     #1A1A1A;
-    --color-text-body:     #3A3835;
-    --color-text-muted:    #7A7470;
+    --color-off-white:     #F8F9FA;
+    --color-light-grey:    #F0F2F5;
+    --color-mid-grey:      #6C757D;
+    --color-text-dark:     #1A1A2E;
+    --color-text-body:     #2D3436;
+    --color-text-muted:    #6C757D;
+    --color-text-light:    #ADB5BD;
 
-    /* ── Gradient Shorthands ── */
-    --gradient-crimson:    linear-gradient(135deg, #C8102E 0%, #9e0b22 100%);
-    --gradient-gold:       linear-gradient(135deg, #D4A017 0%, #F0C040 50%, #D4A017 100%);
-    --gradient-dark-hero:  linear-gradient(160deg, #120A14 0%, #1e0a18 50%, #120A14 100%);
-    --gradient-card:       linear-gradient(145deg, #1C0F20 0%, #1A0F1E 100%);
-    --gradient-shimmer:    linear-gradient(90deg, transparent 0%, rgba(212,160,23,0.08) 50%, transparent 100%);
+    /* ── Gradients ── */
+    --gradient-crimson:    linear-gradient(135deg, #E63946 0%, #c1121f 100%);
+    --gradient-gold:       linear-gradient(135deg, #F4A261 0%, #E9C46A 50%, #F4A261 100%);
+    --gradient-hero:       linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+    --gradient-card:       linear-gradient(145deg, #FFFFFF 0%, #F8F9FA 100%);
+    --gradient-shimmer:    linear-gradient(90deg, transparent 0%, rgba(244,162,97,0.10) 50%, transparent 100%);
+    --gradient-accent:     linear-gradient(135deg, #E63946 0%, #F4A261 100%);
 
     /* ── Typography ── */
     --font-display:        'Playfair Display', Georgia, serif;
-    --font-heading:        'Oswald', Impact, sans-serif;
-    --font-body:           'DM Sans', 'Helvetica Neue', sans-serif;
+    --font-heading:        'Poppins', 'Oswald', sans-serif;
+    --font-body:           'Inter', 'DM Sans', sans-serif;
     --font-mono:           'JetBrains Mono', monospace;
 
     /* ── Spacing Scale ── */
@@ -101,12 +116,14 @@
     --radius-xl:   20px;
     --radius-pill: 999px;
 
-    /* ── Shadows ── */
-    --shadow-card:   0 4px 24px rgba(0,0,0,0.35);
-    --shadow-hover:  0 12px 40px rgba(0,0,0,0.55);
-    --shadow-red:    0 6px 30px rgba(200, 16, 46, 0.35);
-    --shadow-gold:   0 6px 30px rgba(212, 160, 23, 0.35);
-    --shadow-inset:  inset 0 1px 0 rgba(255,255,255,0.06);
+    /* ── Shadows — Light Theme ── */
+    --shadow-sm:     0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-card:   0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+    --shadow-hover:  0 12px 40px rgba(0,0,0,0.14), 0 4px 12px rgba(0,0,0,0.06);
+    --shadow-red:    0 6px 24px rgba(230,57,70,0.30);
+    --shadow-gold:   0 6px 24px rgba(244,162,97,0.30);
+    --shadow-inset:  inset 0 1px 0 rgba(255,255,255,0.80);
+    --shadow-nav:    0 2px 20px rgba(0,0,0,0.10);
 
     /* ── Transitions ── */
     --transition-fast:   0.15s ease;
@@ -140,8 +157,8 @@ html {
 body {
     font-family: var(--font-body);
     line-height: 1.65;
-    color: rgba(255,255,255,0.75);
-    background-color: var(--color-onyx);
+    color: var(--color-text-body);
+    background-color: var(--color-page-bg);
     position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1453,42 +1470,71 @@ input[type="date"].mob-search-input {
     margin-bottom: 55px;
 }
 
+/* ── Bordered box — exactly like screenshot ── */
+.section-header-box {
+    display: inline-block;
+    border: 2px solid #1A1A2E;
+    padding: 28px 48px 24px;
+    position: relative;
+    text-align: center;
+}
+
+/* Corner accents */
+.section-header-box::before,
+.section-header-box::after {
+    content: '';
+    position: absolute;
+    width: 12px; height: 12px;
+    border-color: var(--color-gold);
+    border-style: solid;
+}
+.section-header-box::before {
+    top: -3px; left: -3px;
+    border-width: 3px 0 0 3px;
+}
+.section-header-box::after {
+    bottom: -3px; right: -3px;
+    border-width: 0 3px 3px 0;
+}
+
 .section-title {
-    font-family: var(--font-heading);
-    font-size: 2.2rem;
-    color: var(--color-crimson);
-    margin-bottom: 14px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
+    font-family: 'Oswald', 'Poppins', sans-serif;
+    font-size: 2.6rem;
+    color: #C8102E;
+    margin-bottom: 0;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
     line-height: 1.1;
 }
 
-/* Gold underline accent */
+/* Gold underline bar */
 .section-title::after {
     content: '';
     display: block;
     width: 60px;
     height: 3px;
-    background: var(--gradient-gold);
-    margin: 12px auto 0;
-    border-radius: var(--radius-pill);
+    background: linear-gradient(90deg, #D4A017, #F0C040, #D4A017);
+    margin: 10px auto 0;
+    border-radius: 2px;
 }
 
 .section-subtitle {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    color: var(--color-gold);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem;
+    color: #D4A017;
     font-weight: 700;
     font-style: italic;
-    margin-bottom: 10px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    letter-spacing: 0.3px;
 }
 
 .section-description {
     font-size: 1rem;
-    color: rgba(255,255,255,0.55);
+    color: #6C757D;
     max-width: 640px;
-    margin: 0 auto;
+    margin: 14px auto 0;
     line-height: 1.8;
 }
 
@@ -1801,122 +1847,184 @@ input[type="date"].mob-search-input {
 /* ============================================================
    15. ARTISTS SECTION
    ============================================================ */
+/* ── Artists Section — Light Professional ── */
 .artists {
-    padding: 80px 0;
-    background-color: var(--color-onyx);
+    padding: 100px 0;
+    background: #F8F9FA;
     position: relative;
     overflow: hidden;
 }
 
-/* Dramatic bg texture */
+/* Subtle diagonal accent lines */
 .artists::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 30% 50%, rgba(200,16,46,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 50%, rgba(212,160,23,0.05) 0%, transparent 60%);
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(230,57,70,0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+.artists::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,162,97,0.07) 0%, transparent 70%);
     pointer-events: none;
 }
 
-.artists .section-title { color: var(--color-crimson); }
-.artists .section-subtitle { color: var(--color-gold); }
-.artists .section-description { color: rgba(255,255,255,0.55); }
+.artists .section-title {
+    color: #C8102E !important;
+    font-family: 'Oswald', sans-serif !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    font-size: 2.6rem !important;
+}
+.artists .section-subtitle {
+    color: #D4A017 !important;
+    font-style: italic !important;
+}
+.artists .section-description { color: rgba(255,255,255,0.65) !important; }
 
 .artists-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 28px;
     position: relative;
 }
 
+/* ── Artist Card — Modern Professional ── */
 .artist-card {
-    text-align: center;
+    background: #FFFFFF;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: left;
     cursor: pointer;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+    transition: all 0.32s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 1px solid #E9ECEF;
+}
+
+.artist-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.13), 0 4px 12px rgba(0,0,0,0.06);
+    border-color: rgba(230,57,70,0.20);
 }
 
 .artist-image {
     position: relative;
-    border-radius: var(--radius-xl);
     overflow: hidden;
-    margin-bottom: 18px;
-    box-shadow: var(--shadow-card);
-    transition: all var(--transition-slow);
-}
-
-/* Gold border glow on hover */
-.artist-card:hover .artist-image {
-    box-shadow: 0 8px 40px rgba(212,160,23,0.35), 0 0 0 2px var(--color-gold);
-    transform: scale(1.02);
+    margin-bottom: 0;
+    aspect-ratio: 4/5;
+    background: #F0F2F5;
 }
 
 .artist-image img {
     width: 100%;
-    aspect-ratio: 4/5;
+    height: 100%;
     object-fit: cover;
-    transition: transform var(--transition-slow);
+    object-position: top center;
+    transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+    display: block;
 }
 
 .artist-card:hover .artist-image img {
-    transform: scale(1.06);
+    transform: scale(1.07);
 }
 
-/* Artist overlay */
+/* Gradient overlay at bottom of image */
 .artist-image-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(13,13,13,0.9) 0%, transparent 60%);
+    background: linear-gradient(
+        to top,
+        rgba(26,26,46,0.88) 0%,
+        rgba(26,26,46,0.30) 40%,
+        transparent 70%
+    );
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     padding: 20px;
     opacity: 0;
-    transition: opacity var(--transition-base);
+    transition: opacity 0.28s ease;
 }
 
-.artist-card:hover .artist-image-overlay {
-    opacity: 1;
-}
+.artist-card:hover .artist-image-overlay { opacity: 1; }
 
 .artist-view-link {
-    background: var(--gradient-crimson);
-    color: var(--color-white);
-    padding: 8px 20px;
-    border-radius: var(--radius-pill);
-    font-family: var(--font-body);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #E63946 0%, #c1121f 100%);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 999px;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    text-align: center;
-    box-shadow: var(--shadow-red);
-    display: block;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 16px rgba(230,57,70,0.40);
+    text-decoration: none;
+    align-self: flex-start;
 }
 
+/* Card info block */
 .artist-info {
-    padding: 4px 4px 8px;
+    padding: 18px 20px 20px;
+    border-top: 1px solid #F0F2F5;
+    position: relative;
+}
+
+/* Red accent bar left */
+.artist-info::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 20px; bottom: 20px;
+    width: 3px;
+    background: linear-gradient(180deg, #E63946 0%, #F4A261 100%);
+    border-radius: 0 2px 2px 0;
 }
 
 .artist-name {
-    font-family: var(--font-heading);
-    font-size: 1.2rem;
-    color: var(--color-white);
-    margin-bottom: 6px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.75px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+    color: #1A1A2E;
+    margin-bottom: 4px;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.3;
 }
 
 .artist-role {
-    color: var(--color-gold);
-    font-size: 0.82rem;
+    color: #6C757D;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
     font-weight: 500;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.artist-role::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #E63946;
+    flex-shrink: 0;
 }
 
 .artist-show-count {
     font-size: 11px;
-    color: rgba(255,255,255,0.4);
-    margin-top: 4px;
+    color: #ADB5BD;
+    margin-top: 6px;
+    font-family: 'Inter', sans-serif;
 }
 
 
@@ -2026,9 +2134,10 @@ input[type="date"].mob-search-input {
     position: relative;
 }
 
-.faq-section .section-title { color: var(--color-crimson); }
-.faq-section .section-subtitle { color: var(--color-gold); }
-.faq-section .section-description { color: rgba(255,255,255,0.5); }
+.faq-section .section-title { color: #C8102E !important; }
+.faq-section .section-subtitle { color: #D4A017 !important; }
+.faq-section .section-description { color: #6C757D !important; }
+.faq-section .section-header::after { display: none !important; }
 
 .faq-label {
     display: inline-flex;
@@ -3076,7 +3185,7 @@ input[type="date"].mob-search-input {
     .events-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px; }
 
     /* ── Artists ── */
-    .artists-grid { grid-template-columns: repeat(2, 1fr); gap: 26px; }
+    .artists-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
 
     /* ── Login ── */
     .login-page { padding-top: 185px; padding-bottom: 55px; }
@@ -3375,3 +3484,491 @@ border:0;
 /* ============================================================
    END OF 3SIXTYSHOWS STYLE.CSS
    ============================================================ */
+
+/* ============================================================
+   LIGHT THEME OVERRIDES — Complete redesign
+   Applied after all base rules so specificity wins cleanly
+   ============================================================ */
+
+/* ── Top Bar ── */
+.top-bar {
+    background: var(--color-onyx) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+}
+.top-bar-left span,
+.top-bar-left a,
+.top-bar-right a { color: rgba(255,255,255,0.70) !important; }
+.top-bar-left a:hover,
+.top-bar-right a:hover { color: #fff !important; }
+.top-bar-right a + a { border-left-color: rgba(255,255,255,0.10) !important; }
+
+/* ── Header — stays dark, gets clean shadow ── */
+.header {
+    background-color: var(--color-onyx) !important;
+    background-image: none !important;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.18) !important;
+    border-bottom: 3px solid var(--color-crimson) !important;
+}
+.header-nav-row { border-bottom: 1px solid rgba(255,255,255,0.07) !important; }
+.header-search-row {
+    background: linear-gradient(180deg, #16213E 0%, var(--color-onyx) 100%) !important;
+    border-bottom: 1px solid rgba(244,162,97,0.18) !important;
+}
+.header-search-bar {
+    box-shadow: 0 4px 28px rgba(0,0,0,0.30), 0 0 0 2px rgba(244,162,97,0.22) !important;
+}
+
+/* ── Section titles — consistent crimson+gold across all sections ── */
+.section-title {
+    color: #C8102E !important;
+    font-family: 'Oswald', 'Poppins', sans-serif !important;
+    font-size: 2.6rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+}
+.section-subtitle {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: 1.05rem !important;
+    color: #D4A017 !important;
+    font-weight: 700 !important;
+    font-style: italic !important;
+    letter-spacing: 0.3px !important;
+    text-transform: none !important;
+}
+.section-description { color: #6C757D !important; }
+
+/* Section header decorative underline — handled in base .section-title::after */
+
+/* ── Events section ── */
+.events {
+    background-color: var(--color-section-alt) !important;
+    padding: 88px 0 !important;
+}
+.events .section-title { color: #C8102E !important; }
+
+/* ── About section ── */
+.about-section {
+    background: var(--color-page-bg) !important;
+    padding: 88px 0 !important;
+}
+.about-section::before {
+    background: radial-gradient(ellipse at 100% 50%, rgba(230,57,70,0.04) 0%, transparent 70%) !important;
+}
+.about-label {
+    color: var(--color-crimson) !important;
+    background-color: rgba(230,57,70,0.08) !important;
+    border: 1px solid rgba(230,57,70,0.18) !important;
+}
+.about-text-block {
+    background: var(--color-card-bg) !important;
+    border: 1px solid var(--color-card-border) !important;
+    box-shadow: var(--shadow-card) !important;
+    border-radius: 16px !important;
+}
+.about-text-block:hover {
+    box-shadow: var(--shadow-hover) !important;
+    border-color: rgba(230,57,70,0.18) !important;
+}
+.about-subtitle {
+    color: var(--color-text-dark) !important;
+    font-family: var(--font-heading) !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+}
+.about-subtitle i { color: var(--color-crimson) !important; }
+.about-text-block p { color: var(--color-text-body) !important; }
+
+.about-feature-card {
+    background: var(--color-card-bg) !important;
+    border: 1px solid var(--color-card-border) !important;
+    box-shadow: var(--shadow-card) !important;
+    border-radius: 16px !important;
+    transition: all 0.25s ease !important;
+}
+.about-feature-card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: var(--shadow-hover) !important;
+    border-color: rgba(230,57,70,0.20) !important;
+}
+.about-feature-card h4 {
+    color: var(--color-text-dark) !important;
+    font-family: var(--font-heading) !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+}
+.about-feature-card p { color: var(--color-text-muted) !important; }
+.feature-icon {
+    background: linear-gradient(135deg, rgba(230,57,70,0.10) 0%, rgba(244,162,97,0.10) 100%) !important;
+    border: 1px solid rgba(230,57,70,0.15) !important;
+}
+.feature-icon i { color: var(--color-crimson) !important; }
+
+/* ── Event Cards (style.css classes) ── */
+.event-card {
+    background: var(--color-card-bg) !important;
+    border: 1px solid var(--color-card-border) !important;
+    box-shadow: var(--shadow-card) !important;
+    border-radius: 16px !important;
+}
+.event-card:hover {
+    box-shadow: var(--shadow-hover) !important;
+    border-color: rgba(230,57,70,0.22) !important;
+    transform: translateY(-6px) !important;
+}
+.event-info { background: var(--color-card-bg) !important; }
+.event-title { color: var(--color-text-dark) !important; }
+.event-date, .event-location { color: var(--color-text-muted) !important; }
+.event-price-row { border-top-color: var(--color-card-border) !important; }
+.event-price { color: var(--color-crimson) !important; font-weight: 700 !important; }
+.event-price .from { color: var(--color-text-muted) !important; }
+
+/* Artists — overrides handled in main .artists block above */
+
+/* ── FAQ Section ── */
+.faq-section {
+    background: var(--color-section-alt) !important;
+    padding: 88px 0 !important;
+}
+.faq-label {
+    color: var(--color-crimson) !important;
+    background: rgba(230,57,70,0.08) !important;
+    border-color: rgba(230,57,70,0.18) !important;
+}
+.faq-section .section-header::after { display: none !important; }
+.faq-item {
+    background: var(--color-card-bg) !important;
+    border: 1px solid var(--color-card-border) !important;
+    border-radius: 12px !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+.faq-item:hover, .faq-item.active {
+    border-color: rgba(230,57,70,0.25) !important;
+    box-shadow: 0 4px 20px rgba(230,57,70,0.08) !important;
+}
+.faq-question {
+    color: var(--color-text-dark) !important;
+    font-family: var(--font-body) !important;
+    font-weight: 600 !important;
+}
+.faq-question:hover { color: var(--color-crimson) !important; background: rgba(230,57,70,0.03) !important; }
+.faq-item.active .faq-question { color: var(--color-crimson) !important; border-bottom-color: var(--color-card-border) !important; }
+.faq-icon { background-color: var(--color-section-alt) !important; }
+.faq-icon i { color: var(--color-crimson) !important; }
+.faq-item.active .faq-icon { background: var(--gradient-crimson) !important; }
+.faq-answer p { color: var(--color-text-body) !important; }
+
+/* ── Contact Section ── */
+.contact { background-color: var(--color-page-bg) !important; }
+.contact-form {
+    background: var(--color-card-bg) !important;
+    border: 1px solid var(--color-card-border) !important;
+    box-shadow: var(--shadow-card) !important;
+    border-radius: 16px !important;
+}
+.form-group label { color: var(--color-text-muted) !important; }
+.form-group input, .form-group textarea {
+    background: var(--color-input-bg) !important;
+    border-color: var(--color-input-border) !important;
+    color: var(--color-text-dark) !important;
+    border-radius: var(--radius-lg) !important;
+}
+.form-group input:focus, .form-group textarea:focus {
+    border-color: var(--color-crimson) !important;
+    box-shadow: 0 0 0 3px rgba(230,57,70,0.10) !important;
+    background: #fff !important;
+}
+
+/* ── Buttons ── */
+.btn-primary, .btn-submit, .cf-submit {
+    background: var(--gradient-crimson) !important;
+    color: #fff !important;
+    border-radius: var(--radius-pill) !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: var(--shadow-red) !important;
+    border: none !important;
+    transition: all 0.25s ease !important;
+}
+.btn-primary:hover, .btn-submit:hover, .cf-submit:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 32px rgba(230,57,70,0.40) !important;
+    color: #fff !important;
+}
+.btn-secondary-dark {
+    background: transparent !important;
+    color: var(--color-text-dark) !important;
+    border: 2px solid var(--color-card-border) !important;
+    border-radius: var(--radius-pill) !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 600 !important;
+}
+.btn-secondary-dark:hover {
+    border-color: var(--color-crimson) !important;
+    color: var(--color-crimson) !important;
+    background: rgba(230,57,70,0.04) !important;
+}
+.btn-ticket {
+    background: var(--gradient-accent) !important;
+    border-radius: var(--radius-pill) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px !important;
+}
+
+/* ── Sidebar ── */
+.events-sidebar {
+    background: var(--color-card-bg) !important;
+    border: 1px solid var(--color-card-border) !important;
+    box-shadow: var(--shadow-card) !important;
+    border-radius: 16px !important;
+}
+.sidebar-title {
+    color: var(--color-text-dark) !important;
+    border-bottom: 2px solid var(--color-crimson) !important;
+    font-family: var(--font-heading) !important;
+}
+.filter-group-title { color: var(--color-text-muted) !important; }
+.filter-checkbox { color: var(--color-text-body) !important; }
+.filter-checkbox:hover { color: var(--color-crimson) !important; }
+
+/* ── Login page ── */
+.login-page {
+    background: var(--color-section-alt) !important;
+    background-image: radial-gradient(ellipse at 20% 80%, rgba(230,57,70,0.06) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 20%, rgba(244,162,97,0.06) 0%, transparent 60%) !important;
+}
+.lp-card {
+    background: var(--color-card-bg) !important;
+    border: 1px solid var(--color-card-border) !important;
+    box-shadow: var(--shadow-hover) !important;
+    border-radius: 20px !important;
+}
+.lp-card__header {
+    background: linear-gradient(135deg, var(--color-onyx) 0%, #16213E 100%) !important;
+}
+.lp-input-group {
+    border: 1.5px solid var(--color-input-border) !important;
+    background: var(--color-input-bg) !important;
+    border-radius: var(--radius-lg) !important;
+}
+.lp-input-group:focus-within {
+    border-color: var(--color-crimson) !important;
+    box-shadow: 0 0 0 3px rgba(230,57,70,0.10) !important;
+}
+.lp-input-icon {
+    background: var(--color-section-alt) !important;
+    border-right-color: var(--color-input-border) !important;
+    color: var(--color-crimson) !important;
+}
+.lp-input { color: var(--color-text-dark) !important; background: transparent !important; }
+.lp-input::placeholder { color: var(--color-text-light) !important; }
+.lp-input--full {
+    background: var(--color-input-bg) !important;
+    border: 1.5px solid var(--color-input-border) !important;
+    color: var(--color-text-dark) !important;
+    border-radius: var(--radius-lg) !important;
+}
+.lp-input--full:focus {
+    border-color: var(--color-crimson) !important;
+    box-shadow: 0 0 0 3px rgba(230,57,70,0.10) !important;
+    background: #fff !important;
+}
+.lp-label { color: var(--color-text-muted) !important; }
+
+/* ── Footer — stays dark ── */
+.footer {
+    background: linear-gradient(135deg, var(--color-onyx) 0%, #16213E 100%) !important;
+    border-top: 3px solid transparent !important;
+    background-image: linear-gradient(135deg, var(--color-onyx) 0%, #16213E 100%),
+                      linear-gradient(90deg, var(--color-crimson), var(--color-gold), var(--color-crimson)) !important;
+    background-origin: padding-box, border-box !important;
+    background-clip: padding-box, border-box !important;
+}
+
+/* ── Skeletons ── */
+.skeleton {
+    background: linear-gradient(90deg, #F0F2F5 25%, #E9ECEF 37%, #F0F2F5 63%) !important;
+    background-size: 1200px 100% !important;
+}
+.skeleton-card {
+    background: var(--color-card-bg) !important;
+    border: 1px solid var(--color-card-border) !important;
+    border-radius: 16px !important;
+}
+
+/* ── Scroll animation utility ── */
+.fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Card glassmorphism variant ── */
+.glass-card {
+    background: rgba(255,255,255,0.72) !important;
+    backdrop-filter: blur(12px) saturate(1.4) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(1.4) !important;
+    border: 1px solid rgba(255,255,255,0.55) !important;
+}
+
+/* ── Bollywood decorative dots ── */
+.bindi-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 12px auto;
+}
+.bindi-dots span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-crimson);
+    opacity: 0.5;
+}
+.bindi-dots span:nth-child(2) {
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+    background: var(--gradient-accent);
+}
+
+/* ── Fade-up scroll animation JS hook ── */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Focus states — accessibility ── */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--color-crimson) !important;
+    outline-offset: 2px !important;
+}
+
+/* ============================================================
+   SECTION HEADING SYSTEM — sh- prefix
+   Consistent across all pages — matches screenshot exactly:
+   • Dark border box
+   • Crimson Oswald UPPERCASE h2
+   • Gold italic Playfair subtitle
+   • Gold underbar
+   ============================================================ */
+
+.sh-box {
+    display: inline-block;
+    text-align: center;
+    border: 2px solid #1A1A2E;
+    padding: 28px 52px 24px;
+    position: relative;
+    background: transparent;
+}
+
+/* Corner gold ticks — top-left & bottom-right */
+.sh-box::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: -4px;
+    width: 14px; height: 14px;
+    border-top: 4px solid #D4A017;
+    border-left: 4px solid #D4A017;
+}
+.sh-box::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; right: -4px;
+    width: 14px; height: 14px;
+    border-bottom: 4px solid #D4A017;
+    border-right: 4px solid #D4A017;
+}
+
+/* Gold italic subtitle — above the title */
+.sh-subtitle {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    font-style: italic;
+    color: #D4A017;
+    margin: 0 0 8px;
+    letter-spacing: 0.3px;
+    display: block;
+}
+
+/* Crimson uppercase h2 */
+.sh-title {
+    font-family: 'Oswald', Impact, sans-serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #C8102E;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin: 0;
+}
+
+/* Gold underbar */
+.sh-bar {
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #D4A017, #F0C040, #D4A017);
+    margin: 10px auto 12px;
+    border-radius: 2px;
+}
+
+/* Description text */
+.sh-desc {
+    font-family: 'Inter', 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: #6C757D;
+    margin: 0;
+    line-height: 1.7;
+    max-width: 560px;
+}
+
+/* Section header centering */
+.section-header {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .sh-box { padding: 20px 24px 18px; }
+    .sh-title { font-size: 1.9rem; letter-spacing: 1.5px; }
+    .sh-subtitle { font-size: 0.9rem; }
+}
+
+/* ── sh-box section-specific tweaks ── */
+
+/* Past Events section bg — match alternating rhythm */
+.past-events-section .sh-box {
+    border-color: #1A1A2E;
+}
+.past-events-section .sh-desc {
+    color: #6C757D;
+}
+
+/* Artists section — sh-box on light bg (artists is now #F8F9FA) */
+.artists .sh-subtitle { color: #D4A017 !important; }
+.artists .sh-title    { color: #C8102E !important; }
+.artists .sh-desc     { color: #6C757D !important; }
+.artists .sh-bar      { background: linear-gradient(90deg, #D4A017, #F0C040, #D4A017) !important; }
+
+/* Contact section */
+.contact .sh-desc { color: #6C757D; }
+
+/* Events section */
+.events .sh-desc { color: #6C757D; }

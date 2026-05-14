@@ -10,26 +10,32 @@
 
         {{-- Section Header --}}
         <div class="section-header">
-            <h2 class="section-title">
+          <div class="sh-box">
+            <p class="sh-subtitle">
+                @if($isSearching) Search Results @else Featured Concerts &amp; Shows @endif
+            </p>
+            <h2 class="sh-title">
                 @if($isSearching) Search Results @else Upcoming Events @endif
             </h2>
-            <p class="section-subtitle">
-                @if($isSearching)
-                    @php
-                        $filters = [];
-                        if($location) $filters[] = 'Location: <strong>' . e($location) . '</strong>';
-                        if($date)     $filters[] = 'Date: <strong>' . \Carbon\Carbon::parse($date)->format('M j, Y') . '</strong>';
-                        if($query)    $filters[] = 'Keyword: <strong>' . e($query) . '</strong>';
-                    @endphp
+            <span class="sh-bar"></span>
+            @if($isSearching)
+                @php
+                    $filters = [];
+                    if($location) $filters[] = 'Location: <strong>' . e($location) . '</strong>';
+                    if($date)     $filters[] = 'Date: <strong>' . \Carbon\Carbon::parse($date)->format('M j, Y') . '</strong>';
+                    if($query)    $filters[] = 'Keyword: <strong>' . e($query) . '</strong>';
+                @endphp
+                <p class="sh-desc">
                     {!! implode(' &nbsp;·&nbsp; ', $filters) !!}
                     &nbsp;—&nbsp;
                     <a href="{{ route('events') }}" class="search-clear-link">
                         <i class="fas fa-times-circle"></i> Clear Search
                     </a>
-                @else
-                    Featured Concerts &amp; Shows
-                @endif
-            </p>
+                </p>
+            @else
+                <p class="sh-desc">Discover upcoming Bollywood shows &amp; concerts across Texas</p>
+            @endif
+          </div>
         </div>
 
         {{-- Results count --}}

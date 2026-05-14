@@ -3,9 +3,12 @@
   <div class="container">
 
     <div class="section-header">
-      <h2 class="section-title">Get in Touch</h2>
-      <p class="section-subtitle">Contact Us</p>
-      <p class="section-description">Have questions? We'd love to hear from you.</p>
+      <div class="sh-box">
+        <p class="sh-subtitle">Contact Us</p>
+        <h2 class="sh-title">Get in Touch</h2>
+        <span class="sh-bar"></span>
+        <p class="sh-desc">Have questions? We'd love to hear from you.</p>
+      </div>
     </div>
 
     <div class="contact-wrapper">

@@ -2,11 +2,12 @@
     <section class="about-section" id="about">
       <div class="container">
         <div class="section-header">
-          <span class="about-label">Who We Are</span>
-          <h2 class="section-title">About 3Sixtyshows</h2>
-          <p class="section-description">
-            Texas's premier destination for world-class Bollywood entertainment
-          </p>
+          <div class="sh-box">
+            <p class="sh-subtitle">Who We Are</p>
+            <h2 class="sh-title">About 3Sixtyshows</h2>
+            <span class="sh-bar"></span>
+            <p class="sh-desc">Texas's premier destination for world-class Bollywood entertainment</p>
+          </div>
         </div>
 
 

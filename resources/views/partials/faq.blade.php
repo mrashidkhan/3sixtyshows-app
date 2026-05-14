@@ -2,11 +2,12 @@
     <section class="faq-section" id="faq">
       <div class="container">
         <div class="section-header">
-          <span class="faq-label">Got Questions?</span>
-          <h2 class="section-title">Frequently Asked Questions</h2>
-          <p class="section-description">
-            Everything you need to know about 3Sixtyshows
-          </p>
+          <div class="sh-box">
+            <p class="sh-subtitle">Got Questions?</p>
+            <h2 class="sh-title">Frequently Asked Questions</h2>
+            <span class="sh-bar"></span>
+            <p class="sh-desc">Everything you need to know about 3Sixtyshows</p>
+          </div>
         </div>
 
         <div class="faq-wrapper">

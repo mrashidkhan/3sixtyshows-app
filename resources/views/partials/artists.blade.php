@@ -2,11 +2,12 @@
     <section class="artists" id="artists">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Our Artists</h2>
-          <p class="section-subtitle">Legendary Performers</p>
-          <p class="section-description">
-            Meet the incredible artists who make our events unforgettable
-          </p>
+          <div class="sh-box">
+            <p class="sh-subtitle">Legendary Performers</p>
+            <h2 class="sh-title">Our Artists</h2>
+            <span class="sh-bar"></span>
+            <p class="sh-desc">Meet the incredible artists who make our events unforgettable</p>
+          </div>
         </div>
 
         <div class="artists-grid">

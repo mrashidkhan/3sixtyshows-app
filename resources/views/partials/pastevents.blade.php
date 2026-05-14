@@ -17,11 +17,12 @@
 
         {{-- Section Heading --}}
         <div class="section-header">
-            <span class="pe-eyebrow">
-                <i class="fas fa-history"></i> Archive
-            </span>
-            <h2 class="section-title">Legendary Past Events</h2>
-            <p class="section-subtitle">Relive the magic — every show a story, every night a memory.</p>
+          <div class="sh-box">
+            <p class="sh-subtitle">Relive The Magic</p>
+            <h2 class="sh-title">Legendary Past Events</h2>
+            <span class="sh-bar"></span>
+            <p class="sh-desc">Every show a story, every night a memory — relive the magic.</p>
+          </div>
         </div>
 
         {{-- ══════════════════════════════════════

@@ -9,7 +9,7 @@
     <meta name="description" content="@yield('meta_description', 'Texas\'s premier Bollywood event organizer. Experience world-class entertainment with legendary artists.')" />
 
     {{-- Google Fonts — Oswald · Playfair Display · DM Sans (matches style.css §02) --}}
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     {{-- Font Awesome 6 --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -54,42 +54,167 @@
          ───────────────────────────────────────────────────────────────────── --}}
     <style>
 
-        /* ── 1. Active link colour — gold tint ─────────────────────────────── */
+        /* ══════════════════════════════════════════════════════════════════
+           HEADER — Professional Light Theme
+           White background · Crimson brand · Gold accents
+           ══════════════════════════════════════════════════════════════════ */
+
+        /* ── Top Bar — light warm strip ─────────────────────────────────── */
+        .top-bar {
+            background: #1A1A2E !important;
+            border-bottom: 1px solid rgba(200,16,46,0.15) !important;
+        }
+        .top-bar-left span,
+        .top-bar-left a {
+            color: rgba(255,255,255,0.70) !important;
+            font-size: 12px !important;
+            font-family: 'Inter', sans-serif !important;
+        }
+        .top-bar-left i { color: #D4A017 !important; }
+        .top-bar-left a:hover { color: #D4A017 !important; }
+        .top-bar-right a {
+            color: rgba(255,255,255,0.70) !important;
+            font-size: 12px !important;
+            font-family: 'Inter', sans-serif !important;
+        }
+        .top-bar-right a:hover {
+            color: #D4A017 !important;
+            background: rgba(212,160,23,0.08) !important;
+        }
+        .top-bar-right a + a {
+            border-left-color: rgba(255,255,255,0.12) !important;
+        }
+
+        /* ── Main Header — WHITE background ────────────────────────────── */
+        .header {
+            background: #FFFFFF !important;
+            background-image: none !important;
+            border-bottom: none !important;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05) !important;
+            position: sticky !important;
+            top: 0 !important;
+        }
+
+        /* Crimson bottom accent line */
+        .header::after {
+            content: '' !important;
+            display: block !important;
+            position: absolute !important;
+            bottom: 0; left: 0; right: 0 !important;
+            height: 3px !important;
+            background: linear-gradient(90deg, #C8102E 0%, #D4A017 50%, #C8102E 100%) !important;
+        }
+
+        /* ── Nav row separator ── */
+        .header-nav-row {
+            border-bottom: 1px solid #F0F0F0 !important;
+        }
+
+        /* ── Logo ── */
+        .logo img {
+            height: 52px !important;
+            background: transparent !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* ── Nav links — dark text on white bg ─────────────────────────── */
+        .nav-link {
+            color: #1A1A2E !important;
+            font-family: 'Poppins', sans-serif !important;
+            font-size: 12.5px !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.8px !important;
+            text-transform: uppercase !important;
+            padding: 8px 14px !important;
+            transition: color 0.18s ease !important;
+            position: relative !important;
+        }
+        .nav-link:hover { color: #C8102E !important; }
+
+        /* Active = crimson with underbar */
         .nav-link.active {
-            color: var(--color-gold, #D4A017);
+            color: #C8102E !important;
+        }
+        .nav-link.active::after {
+            content: '' !important;
+            position: absolute !important;
+            bottom: -1px; left: 14px; right: 14px !important;
+            height: 2px !important;
+            background: #C8102E !important;
+            border-radius: 2px !important;
+            display: block !important;
         }
 
-        /* ── 2. ROOT FIX: style.css sets .nav { overflow: hidden } which clips
-              the absolutely-positioned submenu panel on desktop.
-              Override to visible only above the mobile breakpoint.             */
-        @media (min-width: 993px) {
-            .nav { overflow: visible !important; }
+        /* ── Nav caret ── */
+        .nav-caret {
+            font-size: 8px;
+            opacity: 0.50;
+            flex-shrink: 0;
+            transition: transform 0.22s ease;
+        }
+        .nav-dropdown.open > .nav-link .nav-caret { transform: rotate(180deg); }
+
+        /* ── Login button ── */
+        .btn-header-login {
+            background: linear-gradient(135deg, #C8102E 0%, #9e0b22 100%) !important;
+            color: #fff !important;
+            border: none !important;
+            padding: 10px 22px !important;
+            border-radius: 999px !important;
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 12.5px !important;
+            letter-spacing: 0.5px !important;
+            box-shadow: 0 4px 14px rgba(200,16,46,0.30) !important;
+            transition: all 0.22s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 7px !important;
+        }
+        .btn-header-login:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 22px rgba(200,16,46,0.40) !important;
+            color: #fff !important;
         }
 
-        /* ── 3. Dropdown <li> wrapper ─────────────────────────────────────── */
-        .nav-dropdown {
-            position: relative;
+        /* ── Search row — light gray strip ─────────────────────────────── */
+        .header-search-row {
+            background: #F8F9FA !important;
+            padding: 14px 0 18px !important;
+            border-bottom: 2px solid #C8102E !important;
+        }
+        .header-search-bar {
+            border-radius: 12px !important;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.10), 0 0 0 2px rgba(200,16,46,0.12) !important;
+            height: 60px !important;
+            background: #FFFFFF !important;
         }
 
-        /* Parent trigger: inline-flex so caret is inline with label */
+        /* Search segments */
+        .search-segment { background: #FFFFFF !important; }
+        .search-segment:hover { background: #FFF8F8 !important; }
+        .search-seg-label {
+            color: #C8102E !important;
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 10px !important;
+            letter-spacing: 1px !important;
+        }
+        .search-seg-input, .search-seg-input::placeholder {
+            color: #6C757D !important;
+            font-family: 'Inter', sans-serif !important;
+        }
+        .search-seg-icon i { color: #C8102E !important; }
+
+        /* ── Desktop dropdown panel ─────────────────────────────────────── */
+        .nav-dropdown { position: relative; }
         .nav-dropdown > .nav-link {
             display: inline-flex !important;
             align-items: center;
             gap: 4px;
         }
 
-        /* Chevron — only rotates when JS adds .open to the <li> */
-        .nav-caret {
-            font-size: 8px;
-            opacity: 0.55;
-            flex-shrink: 0;
-            transition: transform 0.22s ease;
-        }
-        .nav-dropdown.open > .nav-link .nav-caret {
-            transform: rotate(180deg);
-        }
-
-        /* ── 4. Desktop dropdown panel ─────────────────────────────────────── */
         .nav-submenu {
             visibility: hidden;
             opacity: 0;
@@ -99,20 +224,18 @@
             left: 50%;
             transform: translateX(-50%) translateY(6px);
             min-width: 180px;
-            padding-top: 10px;      /* invisible bridge — cursor can cross gap */
+            padding-top: 10px;
             background: transparent;
             z-index: 9999;
-            transition: opacity 0.17s ease,
-                        transform 0.17s ease,
-                        visibility 0.17s ease;
+            transition: opacity 0.17s ease, transform 0.17s ease, visibility 0.17s ease;
         }
 
         .nav-submenu__inner {
-            background: #120A14;
-            border: 1px solid rgba(255,255,255,0.10);
-            border-top: 2px solid #C8102E;
-            border-radius: 10px;
-            box-shadow: 0 16px 48px rgba(0,0,0,0.70);
+            background: #FFFFFF;
+            border: 1px solid #E9ECEF;
+            border-top: 3px solid #C8102E;
+            border-radius: 12px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.07);
             padding: 6px 0;
             overflow: hidden;
         }
@@ -124,16 +247,16 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* ── 5. Submenu items — desktop ────────────────────────────────────── */
+        /* ── Submenu items — dark text on white ─────────────────────────── */
         .nav-submenu__item {
             display: flex;
             align-items: center;
             gap: 10px;
             padding: 11px 22px;
-            font-family: var(--font-body, 'DM Sans', sans-serif);
-            font-size: 13px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
             font-weight: 600;
-            color: rgba(255,255,255,0.75);
+            color: #1A1A2E;
             text-decoration: none;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -141,12 +264,12 @@
             transition: background 0.14s ease, color 0.14s ease;
         }
         .nav-submenu__item:hover {
-            background: rgba(200,16,46,0.16);
-            color: #fff;
+            background: #FFF0F0;
+            color: #C8102E;
         }
         .nav-submenu__item.active {
-            color: #D4A017;
-            background: rgba(212,160,23,0.08);
+            color: #C8102E;
+            background: rgba(200,16,46,0.05);
         }
         .nav-submenu__item i {
             width: 16px;
@@ -155,34 +278,57 @@
             color: #C8102E;
             flex-shrink: 0;
         }
-        .nav-submenu__item.active i {
-            color: #D4A017;
-        }
+        .nav-submenu__item.active i { color: #C8102E; }
 
         .nav-submenu__divider {
             height: 1px;
-            background: rgba(255,255,255,0.07);
+            background: #F0F0F0;
             margin: 3px 14px;
         }
 
-        /* ── Nav auth item — hidden on desktop ─────────────────────────────── */
+        /* ── Mobile hamburger ─────────────────────────────────────────────── */
+        .mobile-toggle {
+            color: #1A1A2E !important;
+        }
+
+        /* ── Nav auth item — hidden on desktop ─────────────────────────── */
         .nav-auth-item { display: none; }
 
-        /* ── 6. Mobile ≤ 992px ─────────────────────────────────────────────── */
+        /* ── ROOT FIX — desktop submenu overflow ────────────────────────── */
+        @media (min-width: 993px) {
+            .nav { overflow: visible !important; }
+        }
+
+        /* ══════════════════════════════════════════════════════════════════
+           MOBILE ≤ 992px
+           ══════════════════════════════════════════════════════════════════ */
         @media (max-width: 992px) {
 
-            /* ── Hide desktop Login/Logout button from header bar on mobile ── */
             .btn-header-wrapper { display: none !important; }
             .btn-header          { display: none !important; }
 
-            /* ── Show Login/Logout inside the slide-in hamburger nav panel ── */
+            /* Mobile slide-in nav — white background */
+            .nav {
+                background-color: #FFFFFF !important;
+                border-left: 3px solid #C8102E !important;
+                box-shadow: -6px 0 30px rgba(0,0,0,0.15) !important;
+            }
+
+            /* Mobile nav links — dark on white */
+            .nav-link {
+                color: #1A1A2E !important;
+                border-bottom: 1px solid #F0F0F0 !important;
+            }
+            .nav-link:hover,
+            .nav-link.active { color: #C8102E !important; background: #FFF0F0 !important; }
+
+            /* Auth item in mobile nav */
             .nav-auth-item {
                 display: block;
-                border-top: 1px solid rgba(255,255,255,0.08);
+                border-top: 1px solid #F0F0F0;
                 margin-top: 10px;
                 padding: 14px 0 4px;
             }
-
             .nav-auth-wrapper {
                 display: flex;
                 flex-direction: column;
@@ -190,7 +336,6 @@
                 gap: 6px;
                 padding: 0 28px;
             }
-
             .nav-auth-btn {
                 display: inline-flex;
                 align-items: center;
@@ -199,29 +344,26 @@
                 border-radius: 50px;
                 background: linear-gradient(135deg, #C8102E 0%, #9b0c22 100%);
                 color: #fff !important;
-                font-family: var(--font-body, 'DM Sans', sans-serif);
+                font-family: 'Poppins', sans-serif;
                 font-weight: 700;
                 font-size: 13px;
                 letter-spacing: 0.5px;
                 text-transform: uppercase;
                 text-decoration: none;
-                box-shadow: 0 2px 12px rgba(200,16,46,0.4);
+                box-shadow: 0 2px 12px rgba(200,16,46,0.40);
                 transition: all 0.2s ease;
             }
-
             .nav-auth-btn:hover {
                 background: linear-gradient(135deg, #e01535 0%, #C8102E 100%);
                 transform: translateY(-1px);
                 color: #fff !important;
             }
-
             .nav-auth-btn i { font-size: 15px; }
-
             .nav-auth-username {
-                font-family: var(--font-body, 'DM Sans', sans-serif);
+                font-family: 'Poppins', sans-serif;
                 font-size: 12px;
                 font-weight: 600;
-                color: #ffffff;
+                color: #1A1A2E;
                 padding-left: 4px;
                 white-space: nowrap;
                 overflow: hidden;
@@ -229,96 +371,102 @@
                 max-width: 200px;
             }
 
-            /* ── Mobile Gallery accordion ──────────────────────────────────── */
-
-            /* Reset ALL desktop nav-submenu properties */
+            /* Mobile Gallery accordion */
             .nav-submenu {
-                position: static   !important;
+                position: static !important;
                 visibility: visible !important;
-                opacity: 1          !important;
+                opacity: 1 !important;
                 pointer-events: auto !important;
-                transform: none     !important;
-                transition: none    !important;
-                padding: 0          !important;
-                display: none;
-                background: transparent;
-                min-width: unset;
-                z-index: auto;
-                width: 100%;
-                top: auto;
-                left: auto;
+                transform: none !important;
+                transition: none !important;
+                padding: 0 !important;
+                display: none !important;
+                background: transparent !important;
+                min-width: unset !important;
+                z-index: auto !important;
+                width: 100% !important;
+                top: auto !important;
+                left: auto !important;
             }
-
-            /* Accordion panel — full nav width, no indent */
             .nav-submenu__inner {
-                background: rgba(200,16,46,0.07);
-                border-left: 3px solid #C8102E;
-                border-top: none;
-                border-right: none;
-                border-bottom: none;
-                border-radius: 0;
-                box-shadow: none;
-                padding: 4px 0;
-                margin: 0;
-                width: 100%;
-                box-sizing: border-box;
-                overflow: visible;
+                background: #FFF8F8 !important;
+                border-left: 3px solid #C8102E !important;
+                border-top: none !important;
+                border-right: none !important;
+                border-bottom: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                padding: 4px 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                overflow: visible !important;
             }
+            .nav-dropdown.open > .nav-submenu { display: block !important; }
 
-            .nav-dropdown.open > .nav-submenu { display: block; }
-
-            /* Gallery trigger — same padding as other nav-links (from style.css) */
             .nav-dropdown > .nav-link {
                 display: flex !important;
                 width: 100%;
                 justify-content: space-between;
                 box-sizing: border-box;
             }
-
-            /* Submenu items — indented 28px (matches nav-link padding) + 12px extra */
             .nav-submenu__item {
-                padding: 13px 28px 13px 40px;
-                font-size: 13px;
-                color: rgba(255,255,255,0.80);
-                white-space: normal;
-                border-bottom: 1px solid rgba(255,255,255,0.05);
-                width: 100%;
-                box-sizing: border-box;
-                display: flex;
-                align-items: center;
-                gap: 10px;
+                padding: 13px 28px 13px 40px !important;
+                font-size: 12px !important;
+                color: #1A1A2E !important;
+                white-space: normal !important;
+                border-bottom: 1px solid #F0F0F0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 10px !important;
             }
-            .nav-submenu__item:last-child { border-bottom: none; }
+            .nav-submenu__item:last-child { border-bottom: none !important; }
             .nav-submenu__item:hover,
             .nav-submenu__item:active {
-                background: rgba(200,16,46,0.16);
-                color: #fff;
+                background: #FFF0F0 !important;
+                color: #C8102E !important;
             }
-            .nav-submenu__item i {
-                width: 16px;
-                text-align: center;
-                color: #C8102E;
-                flex-shrink: 0;
-            }
-
-            /* Show divider on mobile */
+            .nav-submenu__item i { color: #C8102E !important; }
             .nav-submenu__divider {
-                display: block;
-                height: 1px;
-                background: rgba(255,255,255,0.06);
-                margin: 0;
+                display: block !important;
+                height: 1px !important;
+                background: #F0F0F0 !important;
+                margin: 0 !important;
             }
-
             .nav-caret { margin-left: auto; }
             .nav-dropdown { width: 100%; }
-        }
+
+        } /* end @media 992px */
 
     </style>
+
 
     @stack('styles')
 
     {{-- Page-specific scripts that must load in <head> (e.g. seats.io chart.js) --}}
     @stack('head_scripts')
+    <script>
+    /* Fade-up on scroll — runs once DOM is ready */
+    document.addEventListener('DOMContentLoaded', function () {
+        var targets = document.querySelectorAll(
+            '.about-text-block, .about-feature-card, .event-card, ' +
+            '.otc-card, .artist-card, .faq-item, .section-header'
+        );
+        if (!targets.length) return;
+        targets.forEach(function (el) { el.classList.add('fade-up'); });
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.10 });
+        targets.forEach(function (el) { io.observe(el); });
+    });
+    </script>
 
 </head>
 <body>
