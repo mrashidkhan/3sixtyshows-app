@@ -313,7 +313,7 @@
                     </span>
                     <span>
                         <i class="fas fa-phone"></i>
-                        <span class="top-bar-text">+1-855-360-SHOW</span>
+                        <span class="top-bar-text">855-360-SHOW</span>
                     </span>
                 </div>
 

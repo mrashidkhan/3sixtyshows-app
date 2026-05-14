@@ -9,25 +9,12 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: flex-start;
-        gap: 40px;
+        gap: 48px;
         text-align: center;
     }
-    .footer-logo-section {
-        flex: 0 0 auto;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        padding-top: 4px;
-    }
-    .footer-logo-section img {
-        width: 160px;
-        height: auto;
-        display: block;
-        border-radius: 10px;
-    }
     .footer-section {
-        flex: 1 1 180px;
-        max-width: 240px;
+        flex: 0 0 auto;
+        width: 200px;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -39,7 +26,7 @@
         text-align: center;
         margin-bottom: 14px;
         padding-bottom: 8px;
-        border-bottom: 2px solid #346AB4;
+        border-bottom: 2px solid var(--color-crimson, #C8102E);
     }
     .footer-section h3::after,
     .footer-section h3::before {
@@ -50,12 +37,12 @@
         list-style: none;
         padding: 0;
         margin: 0;
-        display: inline-block;
         text-align: left;
+        display: inline-block;
     }
     .footer-section ul li {
         text-align: left;
-        margin-bottom: 6px;
+        margin-bottom: 8px;
     }
     .footer-social {
         display: flex;
@@ -69,13 +56,10 @@
         .footer-content {
             flex-direction: column;
             align-items: center;
+            gap: 32px;
         }
         .footer-section {
-            max-width: 100%;
             width: 100%;
-        }
-        .footer-logo-section img {
-            width: 130px;
         }
     }
     </style>
@@ -83,13 +67,6 @@
     <footer class="footer">
       <div class="container">
         <div class="footer-content">
-
-          <!-- Logo -->
-          <div class="footer-logo-section">
-            <a href="{{ url('/') }}" class="logo">
-              <img src="{{ asset('assets/images/logos/logo.png') }}" alt="3Sixtyshows" />
-            </a>
-          </div>
 
           <div class="footer-section">
             <h3>Quick Links</h3>

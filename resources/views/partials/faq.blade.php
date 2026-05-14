@@ -17,8 +17,8 @@
             </button>
             <div class="faq-answer">
               <p>
-                Yes! Browsing events and registering your interest on Opal
-                Tickets is completely free. Ticket pricing varies by event and
+                Yes! Browsing events and registering your interest on 3Sixtyshows
+                is completely free. Ticket pricing varies by event and
                 seating category. We also run exclusive promotions — such as our
                 <strong>First 250 Sign-Ups Get FREE TICKETS</strong> offer — so
                 registering early always pays off!
@@ -82,15 +82,11 @@
             <div class="faq-answer">
               <p>
                 Our support team is always ready to help! You can reach us by
-                calling <strong>(855) OPAL-TIX</strong> or emailing us at
-                <strong
-                  ><a
-                    href="/cdn-cgi/l/email-protection"
-                    class="__cf_email__"
-                    data-cfemail="b1d8dfd7def1dec1d0ddc5d8d2dad4c5c29fd2dedc"
-                    >[email&#160;protected]</a
-                  ></strong
-                >. You can also use the Contact form on this page and we'll get
+                calling <strong>855-360-SHOW</strong> or emailing us at
+                <strong>
+  <a href="mailto:info@3sixtyshows.com">info@3sixtyshows.com</a>
+</strong>
+. You can also use the Contact form on this page and we'll get
                 back to you promptly. Follow us on Facebook and Instagram for
                 the latest updates.
               </p>
