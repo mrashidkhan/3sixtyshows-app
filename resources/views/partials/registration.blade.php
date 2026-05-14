@@ -6,20 +6,20 @@
 <style>
 /* ── Registration Page Variables ───────────────────── */
 :root {
-  --reg-navy:   #0d1535;
-  --reg-navy2:  #111d45;
-  --reg-teal:   #00c9a7;
-  --reg-red:    #e8293a;
-  --reg-purple: #7b2ff7;
-  --reg-gray:   #8892b0;
+  --reg-navy:   #120A14;
+  --reg-navy2:  #1C0F20;
+  --reg-teal:   #D4A017;
+  --reg-red:    #C8102E;
+  --reg-purple: #3D2248;
+  --reg-gray:   rgba(255,255,255,0.50);
   --reg-border: rgba(255,255,255,0.08);
-  --reg-text:   #ccd6f6;
-  --opal-blue:  #346AB4;
+  --reg-text:   rgba(255,255,255,0.70);
+  --opal-blue:  #C8102E;
 }
 
 /* ── Top Promo Banner ───────────────────────────────── */
 .reg-top-banner {
-  background: linear-gradient(135deg, #c0392b, #8e24aa);
+  background: linear-gradient(135deg, #9e0b22, #C8102E);
   text-align: center;
   padding: 13px 20px;
   position: relative;
@@ -47,10 +47,10 @@
 
 /* ── Hero ───────────────────────────────────────────── */
 .reg-hero {
-  background: linear-gradient(180deg, #1a0a2e 0%, var(--reg-navy) 100%);
+  background: linear-gradient(180deg, #1C0F20 0%, #120A14 100%);
   padding: 52px 20px 40px;
   text-align: center;
-  border-bottom: 1px solid var(--reg-border);
+  border-bottom: 1px solid rgba(212,160,23,0.20);
   position: relative; overflow: hidden;
 }
 .reg-hero::before {
@@ -58,7 +58,7 @@
   position: absolute; top: -200px; left: 50%;
   transform: translateX(-50%);
   width: 700px; height: 400px;
-  background: radial-gradient(ellipse, rgba(0,201,167,0.07) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(200,16,46,0.10) 0%, transparent 70%);
   pointer-events: none;
 }
 .reg-hero h1 {
@@ -99,14 +99,14 @@
 /* ── Section Title ──────────────────────────────────── */
 .reg-sec-title {
   font-size: clamp(0.85rem, 2.5vw, 1rem);
-  font-weight: 700; color: var(--reg-teal);
+  font-weight: 700; color: var(--color-gold, #D4A017);
   text-transform: uppercase; letter-spacing: 3px;
   margin: 44px 0 20px;
   display: flex; align-items: center; gap: 14px;
 }
 .reg-sec-title::after {
   content: ''; flex: 1; height: 1px;
-  background: linear-gradient(90deg, rgba(0,201,167,0.4), transparent);
+  background: linear-gradient(90deg, rgba(212,160,23,0.4), transparent);
 }
 
 /* ── Event Cards ────────────────────────────────────── */
@@ -124,7 +124,7 @@
 }
 .reg-event-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(0,201,167,0.4);
+  border-color: rgba(200,16,46,0.4);
   box-shadow: 0 12px 35px rgba(0,0,0,0.4);
 }
 .reg-event-card .poster-wrap { overflow: hidden; }
@@ -144,7 +144,7 @@
 }
 .reg-free-tag {
   display: inline-block;
-  background: linear-gradient(135deg, var(--reg-teal), #00a08a);
+  background: linear-gradient(135deg, #C8102E 0%, #9e0b22 100%);
   color: #000; font-size: 0.68rem; font-weight: 800;
   text-transform: uppercase; letter-spacing: 1px;
   padding: 3px 10px; border-radius: 20px; margin-top: 8px;
@@ -152,8 +152,8 @@
 
 /* ── Info Box ───────────────────────────────────────── */
 .reg-info-box {
-  background: rgba(0,201,167,0.06);
-  border: 1px solid rgba(0,201,167,0.2);
+  background: rgba(200,16,46,0.06);
+  border: 1px solid rgba(200,16,46,0.20);
   border-radius: 10px; padding: 20px 24px;
   margin-bottom: 36px;
 }
@@ -209,7 +209,7 @@
 
 .reg-form-group input,
 .reg-form-group select {
-  background: #1e2d5a;
+  background: #1C0F20;
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 8px; padding: 12px 40px 12px 14px;
   color: #fff; font-family: 'Poppins', sans-serif;
@@ -240,7 +240,7 @@
 }
 .reg-form-group input:focus,
 .reg-form-group select:focus {
-  border-color: var(--reg-teal);
+  border-color: #D4A017;
   background-color: #1f3068;
 }
 .reg-form-group input.err-field,

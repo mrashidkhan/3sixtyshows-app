@@ -54,11 +54,11 @@
     --color-crimson-light: #e63355;
     --color-crimson-glow:  rgba(200, 16, 46, 0.18);
 
-    --color-onyx:          #120A14;   /* Rich velvet — base page background */
-    --color-obsidian:      #1A0F1E;   /* Section alt background */
-    --color-charcoal:      #1C0F20;   /* Card / panel background */
-    --color-graphite:      #2A1530;   /* Borders */
-    --color-smoke:         #3D2248;   /* Subtle borders / hover states */
+    --color-onyx:          #0D0D0D;   /* Deep black */
+    --color-obsidian:      #161616;   /* Card/section dark bg */
+    --color-charcoal:      #1E1E1E;   /* Secondary dark */
+    --color-graphite:      #2A2A2A;   /* Borders dark */
+    --color-smoke:         #3D3D3D;
 
     --color-gold:          #D4A017;   /* Accent gold — Bollywood shimmer */
     --color-gold-light:    #F0C040;
@@ -75,8 +75,8 @@
     /* ── Gradient Shorthands ── */
     --gradient-crimson:    linear-gradient(135deg, #C8102E 0%, #9e0b22 100%);
     --gradient-gold:       linear-gradient(135deg, #D4A017 0%, #F0C040 50%, #D4A017 100%);
-    --gradient-dark-hero:  linear-gradient(160deg, #120A14 0%, #1e0a18 50%, #120A14 100%);
-    --gradient-card:       linear-gradient(145deg, #1C0F20 0%, #1A0F1E 100%);
+    --gradient-dark-hero:  linear-gradient(160deg, #0D0D0D 0%, #1a0a0d 50%, #0D0D0D 100%);
+    --gradient-card:       linear-gradient(145deg, #1E1E1E 0%, #161616 100%);
     --gradient-shimmer:    linear-gradient(90deg, transparent 0%, rgba(212,160,23,0.08) 50%, transparent 100%);
 
     /* ── Typography ── */
@@ -379,6 +379,7 @@ input, textarea, select, button {
 .nav {
     flex: 1;
     min-width: 0;
+    overflow: hidden;
 }
 
 .nav ul {
@@ -499,8 +500,7 @@ input, textarea, select, button {
 /* ── Row 2: Search bar row ── */
 .header-search-row {
     padding: 14px 0 18px;
-    background: linear-gradient(180deg, #1A0F1E 0%, #120A14 100%);
-    border-bottom: 1px solid rgba(212,160,23,0.15);
+    background-color: var(--color-onyx);
 }
 
 .header-search-bar {
@@ -510,7 +510,7 @@ input, textarea, select, button {
     border-radius: var(--radius-lg);
     overflow: hidden;
     height: 62px;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.45), 0 0 0 2px rgba(212,160,23,0.30);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,160,23,0.2);
     max-width: 1080px;
     margin: 0 auto;
     position: relative;
@@ -1079,9 +1079,9 @@ input[type="date"].mob-search-input {
     inset: 0;
     background: linear-gradient(
         160deg,
-        rgba(18,10,20,0.55) 0%,
+        rgba(13,13,13,0.55) 0%,
         rgba(200,16,46,0.12) 40%,
-        rgba(18,10,20,0.70) 100%
+        rgba(13,13,13,0.70) 100%
     );
     z-index: 1;
 }
@@ -1094,7 +1094,7 @@ input[type="date"].mob-search-input {
     left: 0;
     right: 0;
     height: 60px;
-    background: linear-gradient(to top, rgba(18, 10, 20, 0.60), transparent);
+    background: linear-gradient(to top, rgba(13, 13, 13, 0.45), transparent);
 }
 
 .hero-content-wrapper {
@@ -1505,7 +1505,7 @@ input[type="date"].mob-search-input {
    ============================================================ */
 .events {
     padding: 80px 0;
-    background-color: var(--color-page-bg);
+    background-color: var(--color-obsidian);
 }
 
 .events-grid {
@@ -1925,24 +1925,23 @@ input[type="date"].mob-search-input {
    ============================================================ */
 .contact {
     padding: 80px 0;
-    background-color: #F5F0E8;
+    background-color: var(--color-charcoal);
     position: relative;
 }
 
 .contact-wrapper {
-    max-width: 780px;
+    max-width: 760px;
     margin: 0 auto;
 }
 
 .contact-form {
-    background: #FFFFFF;
-    border-radius: 16px;
-    padding: 44px 48px;
-    border: 1px solid #E0D5C5;
-    box-shadow: 0 4px 24px rgba(0,0,0,.08);
+    background-color: #2D2D2D;
+    padding: 42px;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 8px 36px rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Legacy form-group rules — kept for any other forms, updated to light theme */
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1959,7 +1958,7 @@ input[type="date"].mob-search-input {
     font-family: var(--font-body);
     font-size: 12px;
     font-weight: 700;
-    color: var(--color-text-muted);
+    color: rgba(255,255,255,0.65);
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-bottom: 8px;
@@ -1968,24 +1967,20 @@ input[type="date"].mob-search-input {
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 13px 16px;
-    border: 1.5px solid #D0C5B0;
+    padding: 14px 16px;
+    border: 1.5px solid rgba(255,255,255,0.12);
     border-radius: var(--radius-lg);
-    font-size: 15px;
+    font-size: 16px;
     font-family: var(--font-body);
-    color: #1A1208;
+    color: var(--color-white);
     transition: all var(--transition-fast);
-    background: #FDFAF6;
-    outline: none;
+    background: rgba(255,255,255,0.06);
 }
-
-.form-group input::placeholder,
-.form-group textarea::placeholder { color: #A89880; }
 
 .form-group input:focus,
 .form-group textarea:focus {
+    outline: none;
     border-color: var(--color-crimson);
-    background: #FFFFFF;
     box-shadow: 0 0 0 3px rgba(200,16,46,0.10);
 }
 
@@ -1997,7 +1992,7 @@ input[type="date"].mob-search-input {
 .btn-submit {
     background: var(--gradient-crimson);
     color: var(--color-white);
-    padding: 14px 48px;
+    padding: 15px 48px;
     border: none;
     border-radius: var(--radius-pill);
     font-family: var(--font-body);
@@ -2885,7 +2880,7 @@ input[type="date"].mob-search-input {
 }
 
 .skeleton {
-    background: linear-gradient(90deg, #1C0F20 25%, #2A1530 37%, #1C0F20 63%);
+    background: linear-gradient(90deg, #1E1E1E 25%, #2A2A2A 37%, #1E1E1E 63%);
     background-size: 1200px 100%;
     animation: shimmer 1.4s ease-in-out infinite;
     border-radius: var(--radius-md);
@@ -3008,11 +3003,12 @@ input[type="date"].mob-search-input {
         height: 100vh;
         width: 275px;
         background-color: var(--color-onyx);
-        padding: 80px 0 28px;
+        padding: 80px 28px 28px;
         transition: right var(--transition-slow);
         box-shadow: -6px 0 30px rgba(0,0,0,0.5);
         z-index: var(--z-modal);
         overflow-y: auto;
+        overflow-x: hidden;
         border-left: 1px solid var(--color-graphite);
     }
 
@@ -3023,20 +3019,14 @@ input[type="date"].mob-search-input {
         gap: 0;
         align-items: flex-start;
         width: 100%;
-        padding: 0;
-        box-sizing: border-box;
     }
 
-    .nav ul li {
-        width: 100%;
-        box-sizing: border-box;
-    }
+    .nav ul li { width: 100%; }
 
-    /* Every nav-link gets left/right padding individually */
     .nav-link {
         display: flex;
         align-items: center;
-        padding: 16px 28px;
+        padding: 16px 0;
         border-bottom: 1px solid var(--color-graphite);
         width: 100%;
         color: rgba(255,255,255,0.75);
@@ -3273,7 +3263,7 @@ margin-top:30px;
 
 .video-item
 {
-background:#1C0F20;
+background:#111;
 border-radius:10px;
 overflow:hidden;
 transition:transform .3s ease, box-shadow .3s ease;

@@ -84,7 +84,7 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    background-color: #0D0D0D;
+    background-color: #120A14;
 
     /* Full-width banner — natural 4:1 ratio on desktop */
     background-image: url('{{ asset("assets/images/events/hero.png") }}');
@@ -103,10 +103,10 @@
     z-index: 1;
     background: linear-gradient(
         to right,
-        rgba(13,13,13,0.08) 0%,
-        rgba(13,13,13,0.02) 40%,
-        rgba(13,13,13,0.00) 55%,
-        rgba(13,13,13,0.12) 100%
+        rgba(18,10,20,0.08) 0%,
+        rgba(18,10,20,0.02) 40%,
+        rgba(18,10,20,0.00) 55%,
+        rgba(18,10,20,0.12) 100%
     );
 }
 
@@ -118,7 +118,7 @@
     background: radial-gradient(
         ellipse 85% 95% at 50% 50%,
         transparent 40%,
-        rgba(13,13,13,0.38) 100%
+        rgba(18,10,20,0.40) 100%
     );
 }
 
@@ -141,7 +141,7 @@
     bottom: 0; left: 0; right: 0;
     height: 80px;
     z-index: 2;
-    background: linear-gradient(to top, rgba(13,13,13,0.70), transparent);
+    background: linear-gradient(to top, rgba(18,10,20,0.75), transparent);
 }
 
 /* ── Shimmer Particles ── */
@@ -388,8 +388,8 @@
     .hero-overlay {
         background: linear-gradient(
             to bottom,
-            rgba(13,13,13,0.25) 0%,
-            rgba(13,13,13,0.52) 100%
+            rgba(18,10,20,0.25) 0%,
+            rgba(18,10,20,0.52) 100%
         );
     }
 
@@ -430,9 +430,9 @@
     .hero-overlay {
         background: linear-gradient(
             175deg,
-            rgba(13,13,13,0.15) 0%,
-            rgba(13,13,13,0.62) 55%,
-            rgba(13,13,13,0.82) 100%
+            rgba(18,10,20,0.15) 0%,
+            rgba(18,10,20,0.62) 55%,
+            rgba(18,10,20,0.82) 100%
         );
     }
 
@@ -440,7 +440,7 @@
         background: radial-gradient(
             ellipse 100% 100% at 50% 50%,
             transparent 15%,
-            rgba(13,13,13,0.52) 100%
+            rgba(18,10,20,0.52) 100%
         );
     }
 

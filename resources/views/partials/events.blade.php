@@ -194,32 +194,26 @@
 <style>
 
 /* ── Grid ──────────────────────────────────────────────────── */
-/*
-   Desktop  (≥ 769px) : exactly 4 equal columns
-   Tablet   (576–768px): exactly 2 columns
-   Mobile   (≤ 575px) : 1 full-width column
-*/
 .otc-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 24px;
     align-items: start;
 }
 
-/* ── Card shell ────────────────────────────────────────────── */
+/* ── Card shell ─────────────────────────────────────────────── */
 .otc-card {
-    background: #fff;
-    border-radius: 10px;
+    background: #FFFFFF;
+    border-radius: 12px;
     overflow: hidden;
-    border: 1px solid #E2E2E2;
-    box-shadow: 0 1px 3px rgba(0,0,0,.07), 0 3px 12px rgba(0,0,0,.06);
+    border: 1px solid #E0D5C5;
+    box-shadow: 0 2px 8px rgba(0,0,0,.07), 0 4px 20px rgba(0,0,0,.06);
     transition: box-shadow .22s ease, transform .22s ease;
-    /* Do NOT set a fixed height — let content define it */
 }
 
 .otc-card:hover {
-    box-shadow: 0 8px 32px rgba(0,0,0,.15);
-    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(0,0,0,.13), 0 0 0 2px rgba(200,16,46,0.20);
+    transform: translateY(-5px);
 }
 
 .otc-card__link {
@@ -228,59 +222,50 @@
     color: inherit;
 }
 
-/* ── ① Dark top bar ────────────────────────────────────────── */
+/* ── ① Top bar ──────────────────────────────────────────────── */
 .otc-topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #111;
+    background: #120A14;
     padding: 8px 13px;
     height: 38px;
     flex-shrink: 0;
-    border-bottom: 2.5px solid rgba(255,255,255,0.70);  /* white separator */
+    border-bottom: 2px solid #D4A017;
 }
 
 .otc-topbar__date {
     font-size: 12.5px;
     font-weight: 700;
-    color: #fff;
+    color: #F0C040;
     letter-spacing: .3px;
     line-height: 1;
     font-family: var(--font-body, 'DM Sans', sans-serif);
 }
 
 .otc-topbar__icon {
-    color: rgba(255,255,255,.72);
+    color: rgba(212,160,23,0.80);
     font-size: 15px;
     line-height: 1;
 }
 
-/* ── ② Portrait poster image ───────────────────────────────── */
-/*
-   KEY FIX:
-   - No aspect-ratio set here — the image renders at its
-     natural dimensions (portrait posters are already taller
-     than wide).
-   - width:100% + height:auto means the card height is driven
-     entirely by the image's own proportions.
-   - overflow:hidden on .otc-card clips any slight overflows.
-*/
+/* ── ② Portrait poster image ─────────────────────────────────── */
 .otc-poster {
     position: relative;
     width: 100%;
     line-height: 0;
     overflow: hidden;
-    background: #111111;
+    background: #120A14;
     aspect-ratio: 1 / 1;
-    padding-top: 6px;        /* gap between separator and poster top */
+    padding-top: 0;
 }
 
 .otc-poster__img {
     width: 100%;
     height: 100%;
     display: block;
-    object-fit: contain;       /* ← show full poster, no crop */
-    object-position: center center;
+    object-fit: cover;
+    object-position: center top;
     transition: transform .38s ease;
 }
 
@@ -294,8 +279,8 @@
     inset: 0;
     background: linear-gradient(
         to top,
-        rgba(10,10,10,.82) 0%,
-        rgba(10,10,10,.20) 45%,
+        rgba(18,10,20,.85) 0%,
+        rgba(18,10,20,.25) 45%,
         transparent        100%
     );
     display: flex;
@@ -325,21 +310,22 @@
     font-family: var(--font-body, 'DM Sans', sans-serif);
 }
 
-/* ── ③ Card body ───────────────────────────────────────────── */
+/* ── ③ Card body ─────────────────────────────────────────────── */
 .otc-body {
-    padding: 12px 14px 14px;
-    background: #fff;
+    padding: 14px 16px 16px;
+    background: #FFFFFF;
+    border-top: 1px solid #F0EAE0;
 }
 
-/* "Shows" grey label */
+/* Category label */
 .otc-body__cat {
     display: block;
-    font-size: 10.5px;
-    font-weight: 600;
-    color: #9CA3AF;
+    font-size: 10px;
+    font-weight: 700;
+    color: #C8102E;
     text-transform: uppercase;
-    letter-spacing: .8px;
-    margin-bottom: 4px;
+    letter-spacing: 1.2px;
+    margin-bottom: 5px;
     line-height: 1;
     font-family: var(--font-body, 'DM Sans', sans-serif);
 }
@@ -348,7 +334,7 @@
 .otc-body__title {
     font-size: 15px;
     font-weight: 700;
-    color: #111827;
+    color: #1A1208;
     line-height: 1.35;
     margin: 0 0 7px;
     display: -webkit-box;
@@ -364,7 +350,7 @@
     align-items: flex-start;
     gap: 5px;
     font-size: 12.5px;
-    color: #6B7280;
+    color: #6A5A4A;
     line-height: 1.4;
     margin: 0;
     font-family: var(--font-body, 'DM Sans', sans-serif);
@@ -380,11 +366,11 @@
 /* Thin divider */
 .otc-body__hr {
     border: none;
-    border-top: 1px solid #F0F0F0;
+    border-top: 1px solid #EDE8DE;
     margin: 10px 0;
 }
 
-/* ── Price row ─────────────────────────────────────────────── */
+/* ── Price row ──────────────────────────────────────────────── */
 .otc-price {
     display: flex;
     align-items: baseline;
@@ -394,26 +380,27 @@
     font-family: var(--font-body, 'DM Sans', sans-serif);
 }
 
-.otc-price__label   { font-size: 12px;   color: #6B7280; font-weight: 400; }
-.otc-price__amount  { font-size: 16.5px; color: #111827; font-weight: 800; letter-spacing: -.3px; }
-.otc-price__was     { font-size: 13px;   color: #9CA3AF; font-weight: 500; text-decoration: line-through; }
-.otc-price__currency{ font-size: 12px;   color: #9CA3AF; font-weight: 600; }
+.otc-price__label   { font-size: 12px;   color: #6A5A4A; font-weight: 400; }
+.otc-price__amount  { font-size: 16.5px; color: #C8102E; font-weight: 800; letter-spacing: -.3px; }
+.otc-price__was     { font-size: 13px;   color: #A09080; font-weight: 500; text-decoration: line-through; }
+.otc-price__currency{ font-size: 12px;   color: #A09080; font-weight: 600; }
 
-/* ── Countdown ─────────────────────────────────────────────── */
+/* ── Countdown ──────────────────────────────────────────────── */
 .otc-cd {
     display: flex;
     align-items: center;
     gap: 7px;
     font-size: 12px;
-    color: #6B7280;
+    color: #6A5A4A;
     line-height: 1.3;
     font-family: var(--font-body, 'DM Sans', sans-serif);
 }
 
 .otc-cd--urgent { color: #DC2626; }
 .otc-cd--today  { color: #16A34A; }
-.otc-cd strong  { font-weight: 700; color: #374151; }
+.otc-cd strong  { font-weight: 700; color: #1A1208; }
 .otc-cd--urgent strong { color: #DC2626; }
+.otc-cd--tba { color: #A09080; font-style: italic; }
 
 .otc-cd__dot {
     width: 8px; height: 8px;
@@ -424,31 +411,29 @@
 
 .otc-cd__dot--red {
     background: #EF4444;
-    box-shadow: 0 0 0 3px rgba(239,68,68,.22);
+    box-shadow: 0 0 0 3px rgba(239,68,68,.20);
     animation: otc-pulse 1.6s infinite;
 }
 
 .otc-cd__dot--green {
     background: #22C55E;
-    box-shadow: 0 0 0 3px rgba(34,197,94,.22);
+    box-shadow: 0 0 0 3px rgba(34,197,94,.20);
 }
 
-.otc-cd__dot--grey { background: #D1D5DB; }
-
-.otc-cd--tba { color: #9CA3AF; font-style: italic; }
+.otc-cd__dot--grey { background: #C8BFB5; }
 
 @keyframes otc-pulse {
-    0%,100% { box-shadow: 0 0 0 3px rgba(239,68,68,.22); }
+    0%,100% { box-shadow: 0 0 0 3px rgba(239,68,68,.20); }
     50%      { box-shadow: 0 0 0 7px rgba(239,68,68,.08); }
 }
 
-/* ── Empty state ───────────────────────────────────────────── */
+/* ── Empty state ────────────────────────────────────────────── */
 .otc-empty {
     grid-column: 1 / -1;
     text-align: center;
     padding: 70px 20px;
-    background: #FAFAF9;
-    border: 1.5px dashed #E5E7EB;
+    background: #FFFFFF;
+    border: 1.5px dashed #E0D5C5;
     border-radius: 14px;
 }
 
@@ -456,12 +441,12 @@
 
 .otc-empty h3 {
     font-size: 1.25rem; font-weight: 700;
-    color: #111827; margin-bottom: 10px;
+    color: #1A1208; margin-bottom: 10px;
     font-family: var(--font-body, 'DM Sans', sans-serif);
 }
 
 .otc-empty p {
-    font-size: .9rem; color: #6B7280;
+    font-size: .9rem; color: #6A5A4A;
     line-height: 1.7; margin-bottom: 20px;
     font-family: var(--font-body, 'DM Sans', sans-serif);
 }
@@ -474,7 +459,7 @@
 }
 
 .otc-tag {
-    background: #F3F4F6; border: 1px solid #E5E7EB; color: #374151;
+    background: rgba(200,16,46,0.06); border: 1px solid rgba(200,16,46,0.18); color: #6A5A4A;
     border-radius: 20px; padding: 5px 14px; font-size: .8rem;
     display: inline-flex; align-items: center; gap: 6px;
     font-family: var(--font-body, 'DM Sans', sans-serif);
@@ -487,18 +472,18 @@
     color: #fff; text-decoration: none;
     padding: 11px 26px; border-radius: 50px;
     font-size: .88rem; font-weight: 700;
-    box-shadow: 0 4px 18px rgba(200,16,46,.30);
+    box-shadow: 0 4px 18px rgba(200,16,46,.25);
     transition: transform .2s, box-shadow .2s;
     font-family: var(--font-body, 'DM Sans', sans-serif);
 }
 .otc-browse-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(200,16,46,.42);
+    box-shadow: 0 8px 28px rgba(200,16,46,.38);
 }
 
-/* ── Search helpers ────────────────────────────────────────── */
+/* ── Search helpers ─────────────────────────────────────────── */
 .search-results-count {
-    font-size: .85rem; color: #888;
+    font-size: .85rem; color: #6A5A4A;
     margin: -12px 0 24px; text-align: center;
 }
 
@@ -510,14 +495,13 @@
 .search-clear-link:hover { opacity: .75; }
 .search-clear-link i { margin-right: 3px; }
 
-/* ── Responsive ────────────────────────────────────────────── */
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .otc-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
 
-/* Mobile: 1 full-width column */
 @media (max-width: 575px) {
-    .otc-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
+    .otc-grid { grid-template-columns: 1fr; gap: 20px; }
     .otc-body        { padding: 13px 14px 15px; }
     .otc-body__title { font-size: 15px; }
     .otc-topbar      { height: 38px; padding: 8px 13px; }

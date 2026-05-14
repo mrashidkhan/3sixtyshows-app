@@ -292,7 +292,7 @@
     box-shadow: var(--shadow-card);
     transition: all var(--transition-slow);
     aspect-ratio: 1 / 1;           /* square container — fits all photo sizes */
-    background: #1a1a1a;           /* dark fill behind any letterbox gaps */
+    background: #1C0F20;           /* velvet fill behind any letterbox gaps */
 }
 
 /* Gold border glow on hover — identical to .artist-card:hover */
@@ -318,7 +318,7 @@
 .tm-card__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(13,13,13,0.90) 0%, transparent 60%);
+    background: linear-gradient(to top, rgba(18,10,20,0.90) 0%, transparent 60%);
     display: flex;
     align-items: flex-end;
     justify-content: center;

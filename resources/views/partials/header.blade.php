@@ -89,49 +89,34 @@
             transform: rotate(180deg);
         }
 
-        /* ── 4. Dropdown panel ─────────────────────────────────────────────
-              NO CSS :hover rule — hover is 100% JS (mouseenter/mouseleave
-              + delay timer). CSS :hover caused flicker because the gap
-              between the link bottom and the panel top briefly interrupted
-              the hover state as the cursor crossed it.
-              JS keeps the panel open for 120 ms after the cursor leaves the
-              <li>, so the cursor can move onto the panel without it closing.
-           ─────────────────────────────────────────────────────────────────── */
+        /* ── 4. Desktop dropdown panel ─────────────────────────────────────── */
         .nav-submenu {
             visibility: hidden;
             opacity: 0;
             pointer-events: none;
-
             position: absolute;
-            top: 100%;          /* flush to bottom of <li> — no gap */
+            top: 100%;
             left: 50%;
-            transform: translateX(-50%) translateY(4px);
-            min-width: 200px;
-
-            /* 10px top padding creates an invisible bridge so the cursor
-               can travel from the link into the panel without mouseleave
-               firing on the <li>. The visible box is the __inner div.      */
-            padding-top: 10px;
+            transform: translateX(-50%) translateY(6px);
+            min-width: 180px;
+            padding-top: 10px;      /* invisible bridge — cursor can cross gap */
             background: transparent;
             z-index: 9999;
-
             transition: opacity 0.17s ease,
                         transform 0.17s ease,
                         visibility 0.17s ease;
         }
 
-        /* Visible box inside the transparent padding wrapper */
         .nav-submenu__inner {
-            background-color: var(--color-onyx, #0D0D0D);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-top: 2px solid var(--color-crimson, #C8102E);
+            background: #120A14;
+            border: 1px solid rgba(255,255,255,0.10);
+            border-top: 2px solid #C8102E;
             border-radius: 10px;
-            box-shadow: 0 14px 44px rgba(0,0,0,0.65);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.70);
             padding: 6px 0;
             overflow: hidden;
         }
 
-        /* JS-only: .open added/removed on the <li> */
         .nav-dropdown.open > .nav-submenu {
             visibility: visible;
             opacity: 1;
@@ -139,16 +124,16 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* ── 5. Submenu items ─────────────────────────────────────────────── */
+        /* ── 5. Submenu items — desktop ────────────────────────────────────── */
         .nav-submenu__item {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 10px 18px;
+            padding: 11px 22px;
             font-family: var(--font-body, 'DM Sans', sans-serif);
-            font-size: 12.5px;
+            font-size: 13px;
             font-weight: 600;
-            color: rgba(255,255,255,0.72);
+            color: rgba(255,255,255,0.75);
             text-decoration: none;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -156,31 +141,31 @@
             transition: background 0.14s ease, color 0.14s ease;
         }
         .nav-submenu__item:hover {
-            background: rgba(200,16,46,0.14);
+            background: rgba(200,16,46,0.16);
             color: #fff;
         }
         .nav-submenu__item.active {
-            color: var(--color-gold, #D4A017);
-            background: rgba(212,160,23,0.07);
+            color: #D4A017;
+            background: rgba(212,160,23,0.08);
         }
         .nav-submenu__item i {
-            width: 15px;
+            width: 16px;
             text-align: center;
-            font-size: 12px;
-            color: var(--color-crimson, #C8102E);
+            font-size: 13px;
+            color: #C8102E;
             flex-shrink: 0;
         }
         .nav-submenu__item.active i {
-            color: var(--color-gold, #D4A017);
+            color: #D4A017;
         }
 
         .nav-submenu__divider {
             height: 1px;
             background: rgba(255,255,255,0.07);
-            margin: 4px 14px;
+            margin: 3px 14px;
         }
 
-        /* ── Nav auth item — hidden on desktop, shown inside mobile slide-in nav ── */
+        /* ── Nav auth item — hidden on desktop ─────────────────────────────── */
         .nav-auth-item { display: none; }
 
         /* ── 6. Mobile ≤ 992px ─────────────────────────────────────────────── */
@@ -244,49 +229,88 @@
                 max-width: 200px;
             }
 
+            /* ── Mobile Gallery accordion ──────────────────────────────────── */
+
+            /* Reset ALL desktop nav-submenu properties */
             .nav-submenu {
-                position: static;
-                visibility: visible;
-                opacity: 1;
-                pointer-events: auto;
-                transform: none;
-                transition: none;
-                padding-top: 0;
-                display: none;          /* JS toggles via .open on <li> */
+                position: static   !important;
+                visibility: visible !important;
+                opacity: 1          !important;
+                pointer-events: auto !important;
+                transform: none     !important;
+                transition: none    !important;
+                padding: 0          !important;
+                display: none;
                 background: transparent;
                 min-width: unset;
                 z-index: auto;
+                width: 100%;
+                top: auto;
+                left: auto;
             }
 
+            /* Accordion panel — full nav width, no indent */
             .nav-submenu__inner {
-                background: rgba(255,255,255,0.03);
-                border: none;
-                border-left: 3px solid var(--color-crimson, #C8102E);
+                background: rgba(200,16,46,0.07);
+                border-left: 3px solid #C8102E;
+                border-top: none;
+                border-right: none;
+                border-bottom: none;
                 border-radius: 0;
                 box-shadow: none;
-                padding: 0;
+                padding: 4px 0;
+                margin: 0;
+                width: 100%;
+                box-sizing: border-box;
+                overflow: visible;
             }
 
             .nav-dropdown.open > .nav-submenu { display: block; }
 
+            /* Gallery trigger — same padding as other nav-links (from style.css) */
+            .nav-dropdown > .nav-link {
+                display: flex !important;
+                width: 100%;
+                justify-content: space-between;
+                box-sizing: border-box;
+            }
+
+            /* Submenu items — indented 28px (matches nav-link padding) + 12px extra */
             .nav-submenu__item {
-                padding: 13px 28px;
-                font-size: 12px;
-                border-bottom: 1px solid rgba(255,255,255,0.04);
-                color: rgba(255,255,255,0.60);
+                padding: 13px 28px 13px 40px;
+                font-size: 13px;
+                color: rgba(255,255,255,0.80);
+                white-space: normal;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+                width: 100%;
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                gap: 10px;
             }
             .nav-submenu__item:last-child { border-bottom: none; }
-
-            .nav-submenu__divider { display: none; }
-
-            .nav-dropdown > .nav-link {
-                width: 100%;
-                justify-content: flex-start;
+            .nav-submenu__item:hover,
+            .nav-submenu__item:active {
+                background: rgba(200,16,46,0.16);
+                color: #fff;
             }
-            .nav-caret {
-                margin-left: auto;
-                opacity: 0.45;
+            .nav-submenu__item i {
+                width: 16px;
+                text-align: center;
+                color: #C8102E;
+                flex-shrink: 0;
             }
+
+            /* Show divider on mobile */
+            .nav-submenu__divider {
+                display: block;
+                height: 1px;
+                background: rgba(255,255,255,0.06);
+                margin: 0;
+            }
+
+            .nav-caret { margin-left: auto; }
+            .nav-dropdown { width: 100%; }
         }
 
     </style>
@@ -400,25 +424,28 @@
                                     <i class="fas fa-chevron-down nav-caret" aria-hidden="true"></i>
                                 </a>
 
-                                <div class="nav-submenu" role="menu" aria-label="Gallery submenu"><div class="nav-submenu__inner">
+                                <div class="nav-submenu" role="menu" aria-label="Gallery submenu">
+                                    <div class="nav-submenu__inner">
 
-                                    <a href="{{ route('gallery.index') }}"
-                                       class="nav-submenu__item {{ request()->routeIs('gallery.*') ? 'active' : '' }}"
-                                       role="menuitem">
-                                        <i class="fas fa-images" aria-hidden="true"></i>
-                                        Photo Gallery
-                                    </a>
+                                        <a href="{{ route('gallery.index') }}"
+                                           class="nav-submenu__item {{ request()->routeIs('gallery.*') ? 'active' : '' }}"
+                                           role="menuitem">
+                                            <i class="fas fa-images" aria-hidden="true"></i>
+                                            Photos
+                                        </a>
 
-                                    <div class="nav-submenu__divider" role="separator"></div>
+                                        <div class="nav-submenu__divider" role="separator"></div>
 
-                                    <a href="{{ route('video-gallery.index') }}"
-                                       class="nav-submenu__item {{ request()->routeIs('video-gallery.*') ? 'active' : '' }}"
-                                       role="menuitem">
-                                        <i class="fas fa-film" aria-hidden="true"></i>
-                                        Video Gallery
-                                    </a>
+                                        <a href="{{ route('video-gallery.index') }}"
+                                           class="nav-submenu__item {{ request()->routeIs('video-gallery.*') ? 'active' : '' }}"
+                                           role="menuitem">
+                                            <i class="fas fa-film" aria-hidden="true"></i>
+                                            Videos
+                                        </a>
 
-                                </div></div>
+                                    </div>
+                                </div>
+
                             </li>
                             {{-- end Gallery dropdown --}}
 
