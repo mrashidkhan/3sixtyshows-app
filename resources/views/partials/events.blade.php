@@ -261,8 +261,8 @@
     width: 100%;
     line-height: 0;
     overflow: hidden;
-    background: #120A14;
-    aspect-ratio: 1 / 1;
+    background: #1A1A2E;
+    aspect-ratio: 3 / 4;
     padding-top: 0;
 }
 
@@ -270,13 +270,13 @@
     width: 100%;
     height: 100%;
     display: block;
-    object-fit: cover;
-    object-position: center top;
+    object-fit: contain;
+    object-position: center center;
     transition: transform .38s ease;
 }
 
 .otc-card:hover .otc-poster__img {
-    transform: scale(1.04);
+    transform: scale(1.03);
 }
 
 /* Hover scrim */

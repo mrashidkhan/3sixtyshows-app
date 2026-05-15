@@ -24,15 +24,31 @@
     <div class="hero-content-wrapper">
         <div class="hero-content">
 
-            <!-- Main heading — no box, no Welcome to, no Dallas Texas -->
-            <div class="hero-sh-box">
-                <h1 class="hero-sh-title">
-                    <span class="hero-sh-brand">3Sixty<em>Shows</em></span>
-                </h1>
-                <span class="hero-sh-bar"></span>
-                <p class="hero-sh-desc">
-                    Biggest&nbsp;Bollywood&nbsp;Events&nbsp;in&nbsp;America
-                </p>
+            <!-- Eyebrow label -->
+            <p class="hero-eyebrow">
+                <span class="hero-eyebrow-line"></span>
+                Dallas&nbsp;&bull;&nbsp;Texas
+                <span class="hero-eyebrow-line"></span>
+            </p>
+
+            <!-- Main title -->
+            <h1 class="hero-title">
+                Welcome to
+                <span class="hero-title-brand">3Sixty<em>Shows</em></span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="hero-subtitle">
+                Biggest&nbsp;Bollywood&nbsp;Events&nbsp;in&nbsp;America
+            </p>
+
+            <!-- Decorative divider -->
+            <div class="hero-divider" aria-hidden="true">
+                <span class="hero-divider-dot"></span>
+                <span class="hero-divider-line"></span>
+                <span class="hero-divider-diamond">&#9670;</span>
+                <span class="hero-divider-line"></span>
+                <span class="hero-divider-dot"></span>
             </div>
 
             <!-- CTA Buttons -->
@@ -182,14 +198,10 @@
 
 .hero-content {
     text-align: right;
-    max-width: 520px;
+    max-width: 500px;
     width: 100%;
     padding: 28px 0;
     animation: hero-content-in 0.9s cubic-bezier(0.22,1,0.36,1) both;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 24px;
 }
 
 @keyframes hero-content-in {
@@ -197,71 +209,98 @@
     to   { opacity:1; transform:translateY(0); }
 }
 
-/* ── Hero sh-box — no border, transparent bg ── */
-.hero-sh-box {
-    display: inline-block;
-    text-align: center;
-    border: none;
-    padding: 0;
-    position: relative;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-}
-
-/* No corner ticks needed */
-.hero-sh-box::before,
-.hero-sh-box::after { display: none; }
-
-/* Crimson Oswald h1 — full title in crimson */
-.hero-sh-title {
-    font-family: 'Oswald', Impact, sans-serif;
-    font-size: clamp(2.4rem, 5vw, 4.2rem);
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
     font-weight: 700;
-    color: #C8102E;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    line-height: 1.05;
-    margin: 0;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.80), 0 0 40px rgba(200,16,46,0.30);
+    letter-spacing: 4px;
+    color: #F0C040;
+    margin: 0 0 14px 0;
+    opacity: 0.90;
 }
 
-.hero-sh-brand {
+.hero-eyebrow-line {
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: linear-gradient(90deg, #D4A017, #F0C040);
+    opacity: 0.7;
+}
+
+.hero-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.8rem, 3.8vw, 3.6rem);
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0 0 10px 0;
+    letter-spacing: 1.5px;
+    line-height: 1.08;
+    text-transform: uppercase;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.75), 0 0 40px rgba(0,0,0,0.4);
     display: block;
-    color: #C8102E;
 }
 
-/* "Shows" em — same color, same size, no override */
-.hero-sh-brand em {
+.hero-title-brand {
+    display: block;
+    color: #FFFFFF;
+}
+
+.hero-title-brand em {
     font-style: normal;
     color: #C8102E;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.80), 0 0 40px rgba(200,16,46,0.30);
+    text-shadow: 0 0 30px rgba(200,16,46,0.55), 0 2px 12px rgba(0,0,0,0.65);
 }
 
-/* Gold bar */
-.hero-sh-bar {
-    display: block;
-    width: 70px;
-    height: 3px;
-    background: linear-gradient(90deg, #D4A017, #F0C040, #D4A017);
-    margin: 14px auto 12px;
-    border-radius: 2px;
-}
-
-/* Gold italic description */
-.hero-sh-desc {
+.hero-subtitle {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+    font-size: clamp(0.95rem, 2vw, 1.5rem);
     font-weight: 700;
     font-style: italic;
-    color: #F0C040;
-    margin: 0;
-    letter-spacing: 0.3px;
-    line-height: 1.4;
-    text-shadow: 0 1px 8px rgba(0,0,0,0.60);
+    color: rgba(255,255,255,0.88);
+    margin: 0 0 18px 0;
+    line-height: 1.35;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+    display: block;
+    letter-spacing: 0.4px;
 }
 
-/* ── CTA Buttons ── */
+.hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin: 0 0 20px 0;
+}
+
+.hero-divider-line {
+    display: inline-block;
+    width: 44px; height: 1px;
+    background: linear-gradient(90deg, transparent, #D4A017);
+    opacity: 0.55;
+}
+
+.hero-divider-line:last-child {
+    background: linear-gradient(90deg, #D4A017, transparent);
+}
+
+.hero-divider-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: #D4A017;
+    opacity: 0.5;
+    display: inline-block;
+}
+
+.hero-divider-diamond {
+    font-size: 9px;
+    color: #D4A017;
+    opacity: 0.8;
+    line-height: 1;
+}
+
 .hero-buttons {
     display: flex;
     gap: 14px;
@@ -340,10 +379,12 @@
 @media (max-width: 992px) {
 
     .hero {
+        /* Shift anchor so figures stay visible behind centered text */
         background-position: 22% center;
         min-height: clamp(340px, 44vw, 480px);
     }
 
+    /* Stronger tint so centered text is legible over figures */
     .hero-overlay {
         background: linear-gradient(
             to bottom,
@@ -359,24 +400,33 @@
 
     .hero-content {
         text-align: center;
-        align-items: center;
-        max-width: 580px;
+        max-width: 560px;
         padding: 32px 20px;
     }
 
+    .hero-eyebrow,
+    .hero-divider,
     .hero-buttons { justify-content: center; }
-    .hero-sh-title { font-size: clamp(1.7rem, 4.5vw, 2.6rem); }
+
+    .hero-divider-line { width: 34px; }
+    .hero-title { font-size: clamp(1.7rem, 4.5vw, 2.6rem); }
 }
 
 /* ── Mobile ≤ 768px ──────────────────────────── */
 @media (max-width: 768px) {
 
     .hero {
+        /*
+         * At 375px wide the 4:1 image is only 94px tall with cover+vw.
+         * Fix: set explicit min-height, lock bg-size to height, shift x
+         * so the main seated figure sits behind the bottom-aligned text.
+         */
         min-height: 480px;
-        background-size: auto 100%;
-        background-position: 24% top;
+        background-size: auto 100%;     /* height fills, width crops */
+        background-position: 24% top;  /* keep figure centred */
     }
 
+    /* Heavier scrim: text needs to be legible over busy image content */
     .hero-overlay {
         background: linear-gradient(
             175deg,
@@ -394,6 +444,7 @@
         );
     }
 
+    /* Push text to bottom so figures show above */
     .hero-content-wrapper {
         align-items: flex-end;
         padding: 0 0 36px 0;
@@ -401,13 +452,12 @@
 
     .hero-content {
         text-align: center;
-        align-items: center;
         max-width: 100%;
-        padding: 20px 20px;
+        padding: 20px 24px;
     }
 
-    .hero-sh-title { font-size: clamp(1.55rem, 6.5vw, 2.6rem); letter-spacing: 1.5px; }
-    .hero-sh-desc  { font-size: clamp(0.82rem, 3vw, 1rem); }
+    .hero-title    { font-size: clamp(1.55rem, 6.5vw, 2.1rem); }
+    .hero-subtitle { font-size: clamp(0.88rem, 3.2vw, 1.05rem); }
 
     .hero-btn { padding: 11px 22px; font-size: 12px; }
     .hero-particles { display: none; }
@@ -423,8 +473,9 @@
 
     .hero-content-wrapper { padding-bottom: 28px; }
 
-    .hero-sh-title  { font-size: clamp(1.35rem, 7.5vw, 1.9rem); letter-spacing: 0.8px; }
-    .hero-sh-desc   { font-size: 0.85rem; }
+    .hero-title    { font-size: clamp(1.35rem, 7.5vw, 1.8rem); letter-spacing: 0.8px; }
+    .hero-subtitle { font-size: 0.88rem; }
+    .hero-eyebrow  { font-size: 9px; letter-spacing: 3px; }
 
     .hero-buttons {
         flex-direction: column;
@@ -433,13 +484,14 @@
     }
 
     .hero-btn        { width: 200px; justify-content: center; padding: 11px 18px; }
+    .hero-divider-line { width: 26px; }
     .hero-bottom-fade  { height: 50px; }
 }
 
 /* ── Very Small ≤ 360px ──────────────────────── */
 @media (max-width: 360px) {
     .hero          { min-height: 390px; }
-    .hero-sh-title { font-size: 1.25rem; }
+    .hero-title    { font-size: 1.25rem; }
     .hero-btn      { width: 175px; font-size: 11px; }
 }
 

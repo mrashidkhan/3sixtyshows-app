@@ -200,9 +200,8 @@ class PageController extends Controller
     $search = trim($request->get('search', ''));
 
     $query = \App\Models\Show::with(['venue'])
-        // ✅ REMOVED: ->where('is_active', true)
-        // Past events should show regardless of is_active status,
-        // since admins often deactivate shows after they're done.
+        // ✅ Only show active events
+        ->where('is_active', true)
         ->where(function($q) {
             $q->where('status', 'past')
               ->orWhere('status', 'completed')
