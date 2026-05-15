@@ -474,7 +474,7 @@
     {{-- ═══════════════════════════════════════════════════════════════════
          TOP BAR
          ═══════════════════════════════════════════════════════════════════ --}}
-    {{-- <div class="top-bar">
+    <div class="top-bar">
         <div class="container">
             <div class="top-bar-content">
 
@@ -502,7 +502,7 @@
 
             </div>
         </div>
-    </div> --}}
+    </div>
     {{-- end .top-bar --}}
 
 
@@ -678,7 +678,134 @@
         {{-- end Row 1 --}}
 
 
+        {{-- ── Row 2: Desktop Search Bar ──────────────────────────────── --}}
+        <div class="header-search-row">
+            <div class="container">
+                <div class="header-search-bar">
 
+                    {{-- Location segment --}}
+                    <div class="search-segment search-seg-location">
+                        <span class="search-seg-icon">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        </span>
+                        <div class="search-seg-body">
+                            <span class="search-seg-label">Location</span>
+                            <input type="text"
+                                   class="search-seg-input"
+                                   id="search-location"
+                                   placeholder="City or Zip Code"
+                                   aria-label="Location" />
+                        </div>
+                    </div>
+
+                    <div class="search-divider" aria-hidden="true"></div>
+
+                    {{-- Dates segment --}}
+                    <div class="search-segment search-seg-dates"
+                         onclick="this.querySelector('input[type=date]').showPicker()">
+                        <span class="search-seg-icon">
+                            <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                        </span>
+                        <div class="search-seg-body">
+                            <span class="search-seg-label">Dates</span>
+                            <input type="date"
+                                   class="search-seg-input search-seg-date-input"
+                                   id="event-date"
+                                   name="event_date"
+                                   aria-label="Select event date" />
+                        </div>
+                    </div>
+
+                    <div class="search-divider" aria-hidden="true"></div>
+
+                    {{-- Keyword segment --}}
+                    <div class="search-segment search-seg-query">
+                        <span class="search-seg-icon">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </span>
+                        <div class="search-seg-body">
+                            <span class="search-seg-label">Search</span>
+                            <input type="text"
+                                   class="search-seg-input"
+                                   id="main-search-input"
+                                   placeholder="Artist, Event or Venue"
+                                   aria-label="Search events" />
+                        </div>
+                    </div>
+
+                    <button class="search-submit-btn"
+                            type="button"
+                            onclick="handleSearch()"
+                            aria-label="Search events">
+                        Search
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        {{-- end Row 2 --}}
+
+
+        {{-- ── Row 3: Mobile Search Strip ─────────────────────────────── --}}
+        <div class="mobile-search-strip">
+            <div class="mob-search-card">
+
+                {{-- Location --}}
+                <div class="mob-search-row">
+                    <span class="mob-search-icon">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    </span>
+                    <div class="mob-search-body">
+                        <span class="mob-search-label">Location</span>
+                        <input type="text"
+                               class="mob-search-input"
+                               id="mob-location"
+                               placeholder="City or Zip Code"
+                               aria-label="Location" />
+                    </div>
+                </div>
+
+                <div class="mob-search-sep" aria-hidden="true"></div>
+
+                {{-- Dates --}}
+                <div class="mob-search-row">
+                    <span class="mob-search-icon">
+                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                    </span>
+                    <div class="mob-search-body">
+                        <span class="mob-search-label">Dates</span>
+                        <input type="date"
+                               class="mob-search-input"
+                               id="mob-date"
+                               aria-label="Select event date" />
+                    </div>
+                </div>
+
+                <div class="mob-search-sep" aria-hidden="true"></div>
+
+                {{-- Keyword --}}
+                <div class="mob-search-row">
+                    <span class="mob-search-icon">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </span>
+                    <div class="mob-search-body">
+                        <span class="mob-search-label">Search</span>
+                        <input type="text"
+                               class="mob-search-input"
+                               id="mobile-search-input"
+                               placeholder="Artist, Event or Venue"
+                               aria-label="Search events" />
+                    </div>
+                </div>
+
+                <button class="mob-search-btn"
+                        type="button"
+                        onclick="handleMobSearch()">
+                    <i class="fas fa-search" aria-hidden="true"></i>&nbsp; Search Events
+                </button>
+
+            </div>
+        </div>
         {{-- end Row 3 --}}
 
     </header>
