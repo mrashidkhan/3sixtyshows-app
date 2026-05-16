@@ -1,4 +1,3 @@
-
 {{-- resources/views/gallery/year.blade.php --}}
 @extends('layouts.master')
 
@@ -9,43 +8,147 @@
 <style>
 /* ── Hero ─────────────────────────────────────────────────── */
 .glr-hero {
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a0005 50%, #0a0a0a 100%);
-    padding: 72px 0 52px;
+    background: #F5F5F5;
+    padding: 48px 0 52px;
     position: relative;
-    overflow: hidden;
 }
-.glr-hero::before {
+
+/* ── Breadcrumb pill ──────────────────────────────────────── */
+.glr-breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+    font-family: 'DM Sans', sans-serif;
+}
+.glr-breadcrumb__inner {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #fff;
+    border: 1px solid #E2E2E2;
+    border-radius: 999px;
+    padding: 7px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.07);
+}
+.glr-breadcrumb__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #555;
+    text-decoration: none;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    transition: color .18s ease;
+    white-space: nowrap;
+}
+.glr-breadcrumb__link i { font-size: 10px; color: #C8102E; }
+.glr-breadcrumb__link:hover { color: #C8102E; text-decoration: none; }
+.glr-breadcrumb__sep {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 8px;
+    color: #D4A017;
+    font-size: 11px;
+    font-weight: 700;
+    user-select: none;
+}
+.glr-breadcrumb__current {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #C8102E;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── Bordered heading box ─────────────────────────────────── */
+.glr-hero__head {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    border: 1.5px solid #1a1a1a;
+    padding: 36px 48px 32px;
+    text-align: center;
+    background: #fff;
+}
+/* Gold corner brackets */
+.glr-hero__head::before,
+.glr-hero__head::after {
     content: '';
     position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(200,16,46,0.18) 0%, transparent 70%);
-    pointer-events: none;
+    width: 22px;
+    height: 22px;
+    border-color: #D4A017;
+    border-style: solid;
 }
-.glr-hero__breadcrumb {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.38);
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    font-family: var(--font-body, 'DM Sans', sans-serif);
+.glr-hero__head::before { top: -3px; left: -3px; border-width: 3px 0 0 3px; }
+.glr-hero__head::after  { bottom: -3px; right: -3px; border-width: 0 3px 3px 0; }
+
+/* Gold italic label */
+.glr-hero__label {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(.9rem, 1.5vw, 1.1rem);
+    font-weight: 700;
+    font-style: italic;
+    color: #D4A017;
+    letter-spacing: .03em;
+    margin: 0 0 12px;
 }
-.glr-hero__breadcrumb a { color: #D4A017; text-decoration: none; }
-.glr-hero__breadcrumb a:hover { text-decoration: underline; }
+/* Crimson title */
 .glr-hero__title {
     font-family: 'Oswald', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
     font-weight: 700;
-    letter-spacing: 0.04em;
-    color: #fff;
+    letter-spacing: .06em;
+    color: #C8102E;
     text-transform: uppercase;
-    line-height: 1;
+    line-height: 1.08;
+    margin: 0;
 }
-.glr-hero__title span { color: #C8102E; }
+/* Gold underbar */
+.glr-hero__title::after {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 3px;
+    background: #D4A017;
+    border-radius: 2px;
+    margin: 14px auto 0;
+}
+/* Description — gold left bar */
 .glr-hero__sub {
-    color: rgba(255,255,255,0.5);
-    font-family: var(--font-body, 'DM Sans', sans-serif);
-    font-size: 1rem;
-    margin-top: 10px;
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .92rem;
+    font-weight: 500;
+    color: #444;
+    margin: 20px auto 0;
+    line-height: 1.55;
+    padding: 9px 24px;
+    background: #FDF9F2;
+    border: none !important;
+    border-left: 3px solid #D4A017 !important;
+    outline: none !important;
+    border-radius: 0 6px 6px 0;
+    letter-spacing: .01em;
+}
+
+@media (max-width: 576px) {
+    .glr-hero__head { padding: 28px 24px 24px; }
+    .glr-breadcrumb__inner { padding: 6px 14px; border-radius: 12px; }
+    .glr-breadcrumb__link,
+    .glr-breadcrumb__current { font-size: 10px; }
+    .glr-breadcrumb__sep { margin: 0 5px; }
 }
 
 /* Year nav pills */
@@ -53,18 +156,21 @@
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+    justify-content: center;
     margin-top: 22px;
 }
 .glr-year-pill {
     font-family: 'Oswald', sans-serif;
-    font-size: 0.88rem;
-    letter-spacing: 0.06em;
-    padding: 5px 16px;
+    font-size: 0.85rem;
+    letter-spacing: .06em;
+    padding: 5px 18px;
     border-radius: 30px;
-    border: 1px solid rgba(255,255,255,0.18);
-    color: rgba(255,255,255,0.5);
+    border: 1.5px solid #D8D2CA;
+    color: #555;
+    background: #fff;
     text-decoration: none;
     transition: all .22s ease;
+    font-weight: 600;
 }
 .glr-year-pill:hover,
 .glr-year-pill--active {
@@ -392,18 +498,34 @@
 
 <section class="glr-hero">
     <div class="container">
-        <div class="glr-hero__breadcrumb">
-            <a href="{{ route('index') }}">Home</a>
-            <span class="mx-2">›</span>
-            <a href="{{ route('gallery.index') }}">Gallery</a>
-            <span class="mx-2">›</span>
-            <span>{{ $year }}</span>
-        </div>
-        <h1 class="glr-hero__title"><span>{{ $year }}</span> Galleries</h1>
-        <p class="glr-hero__sub">
-            {{ $galleries->total() }} {{ Str::plural('event gallery', $galleries->total()) }} from {{ $year }}
-        </p>
 
+        {{-- Breadcrumb pill --}}
+        <nav class="glr-breadcrumb" aria-label="Breadcrumb">
+            <div class="glr-breadcrumb__inner">
+                <a href="{{ route('index') }}" class="glr-breadcrumb__link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="glr-breadcrumb__sep">&#8250;</span>
+                <a href="{{ route('gallery.index') }}" class="glr-breadcrumb__link">
+                    <i class="fas fa-images"></i> Photo Gallery
+                </a>
+                <span class="glr-breadcrumb__sep">&#8250;</span>
+                <span class="glr-breadcrumb__current">
+                    <i class="fas fa-calendar-alt"></i> {{ $year }}
+                </span>
+            </div>
+        </nav>
+
+        {{-- Bordered heading box --}}
+        <div class="glr-hero__head">
+            <span class="glr-hero__label">Photo Gallery</span>
+            <h1 class="glr-hero__title">{{ $year }} Events</h1>
+            <div class="glr-hero__sub">
+                {{ $galleries->total() }} {{ Str::plural('event gallery', $galleries->total()) }} from {{ $year }}
+            </div>
+        </div>
+
+        {{-- Year nav pills — below the box --}}
         @if($availableYears->count() > 1)
         <div class="glr-year-nav">
             @foreach($availableYears as $yr)
@@ -414,6 +536,7 @@
             @endforeach
         </div>
         @endif
+
     </div>
 </section>
 

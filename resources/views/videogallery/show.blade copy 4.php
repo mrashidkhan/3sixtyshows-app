@@ -12,168 +12,73 @@
 <style>
 /* ─── Hero ───────────────────────────────────────────────────────── */
 .vshow-hero {
-    background: #F5F5F5;
-    padding: 48px 0 52px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #00051a 50%, #0a0a0a 100%);
+    padding: 56px 0 40px;
     position: relative;
-}
-
-/* ── Breadcrumb ─────────────────────────────────────────── */
-.vshow-breadcrumb {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 28px;
-    font-family: 'DM Sans', sans-serif;
-}
-/* Pill container */
-.vshow-breadcrumb__inner {
-    display: inline-flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0;
-    background: #fff;
-    border: 1px solid #E2E2E2;
-    border-radius: 999px;
-    padding: 7px 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,.07);
-}
-/* Crumb links */
-.vshow-breadcrumb__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11.5px;
-    font-weight: 600;
-    color: #555;
-    text-decoration: none;
-    letter-spacing: .4px;
-    text-transform: uppercase;
-    transition: color .18s ease;
-    white-space: nowrap;
-}
-.vshow-breadcrumb__link i { font-size: 10px; color: #C8102E; }
-.vshow-breadcrumb__link:hover { color: #C8102E; text-decoration: none; }
-/* Separator */
-.vshow-breadcrumb__sep {
-    display: inline-flex;
-    align-items: center;
-    margin: 0 8px;
-    color: #D4A017;
-    font-size: 11px;
-    font-weight: 700;
-    user-select: none;
-}
-/* Current page (last crumb) */
-.vshow-breadcrumb__current {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11.5px;
-    font-weight: 700;
-    color: #C8102E;
-    letter-spacing: .4px;
-    text-transform: uppercase;
-    max-width: 240px;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
-@media (max-width: 576px) {
-    .vshow-breadcrumb__inner { padding: 6px 14px; border-radius: 12px; }
-    .vshow-breadcrumb__link,
-    .vshow-breadcrumb__current { font-size: 10px; }
-    .vshow-breadcrumb__sep { margin: 0 5px; }
-}
-
-/* ── Bordered heading box — matches Past Events page ────── */
-.vshow-hero__head {
-    position: relative;
-    max-width: 720px;
-    margin: 0 auto;
-    border: 1.5px solid #1a1a1a;
-    padding: 36px 48px 32px;
-    text-align: center;
-    background: #fff;
-}
-
-/* Gold corner brackets — top-left & bottom-right */
-.vshow-hero__head::before,
-.vshow-hero__head::after {
+.vshow-hero::before {
     content: '';
     position: absolute;
-    width: 22px;
-    height: 22px;
-    border-color: #D4A017;
-    border-style: solid;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 0%,
+                rgba(200,16,46,.18) 0%, transparent 70%);
+    pointer-events: none;
 }
-.vshow-hero__head::before {
-    top: -3px;
-    left: -3px;
-    border-width: 3px 0 0 3px;
+.vshow-breadcrumb {
+    font-size: .78rem;
+    color: rgba(255,255,255,.38);
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-family: var(--font-body,'DM Sans',sans-serif);
 }
-.vshow-hero__head::after {
-    bottom: -3px;
-    right: -3px;
-    border-width: 0 3px 3px 0;
-}
+.vshow-breadcrumb a { color: #D4A017; text-decoration: none; }
+.vshow-breadcrumb a:hover { text-decoration: underline; }
 
-/* Gold italic label — "Video Gallery" */
+/* ── Hero heading block — matches Events page style ─────── */
 .vshow-hero__label {
-    display: block;
     font-family: 'Playfair Display', serif;
-    font-size: clamp(.9rem, 1.5vw, 1.1rem);
+    font-size: clamp(.85rem, 1.4vw, 1.05rem);
     font-weight: 700;
     font-style: italic;
     color: #D4A017;
-    letter-spacing: .03em;
-    margin: 0 0 12px;
+    letter-spacing: .04em;
+    margin: 0 0 10px;
+    display: block;
 }
-
-/* Crimson bold title — gallery name */
 .vshow-hero__title {
     font-family: 'Oswald', sans-serif;
-    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
     font-weight: 700;
     letter-spacing: .06em;
     color: #C8102E;
     text-transform: uppercase;
     line-height: 1.08;
-    margin: 0 0 0;
+    margin: 0 0 14px;
 }
-
-/* Gold underbar beneath title */
+/* Gold underbar */
 .vshow-hero__title::after {
     content: '';
     display: block;
-    width: 56px;
+    width: 60px;
     height: 3px;
     background: #D4A017;
     border-radius: 2px;
-    margin: 14px auto 0;
+    margin: 12px auto 0;
 }
-
-/* Description text — attractive styled, override any global border */
 .vshow-hero__sub {
-    display: inline-block;
     font-family: 'DM Sans', sans-serif;
-    font-size: .92rem;
-    font-weight: 500;
-    color: #444;
-    margin: 20px auto 0;
+    font-size: 1rem;
+    color: rgba(255,255,255,.60);
+    margin: 10px 0 0;
     line-height: 1.55;
-    padding: 9px 24px;
-    background: #FDF9F2;
-    border: none !important;
-    border-left: 3px solid #D4A017 !important;
-    outline: none !important;
-    box-shadow: inset 0 0 0 0 transparent !important;
-    border-radius: 0 6px 6px 0;
-    letter-spacing: .01em;
 }
 
-@media (max-width: 576px) {
-    .vshow-hero__head { padding: 28px 24px 24px; }
+/* Centre the heading block */
+.vshow-hero__head {
+    text-align: center;
+    margin-bottom: 6px;
 }
 
 /* ─── Section ────────────────────────────────────────────────────── */
@@ -468,49 +373,22 @@
 {{-- ── Hero ──────────────────────────────────────────────────────── --}}
 <section class="vshow-hero">
     <div class="container">
-
-        {{-- Breadcrumb — above the box --}}
-        <nav class="vshow-breadcrumb" aria-label="Breadcrumb">
-            <div class="vshow-breadcrumb__inner">
-
-                <a href="{{ route('index') }}" class="vshow-breadcrumb__link">
-                    <i class="fas fa-home"></i>
-                    Home
-                </a>
-
-                <span class="vshow-breadcrumb__sep">&#8250;</span>
-
-                <a href="{{ route('video-gallery.index') }}" class="vshow-breadcrumb__link">
-                    <i class="fas fa-film"></i>
-                    Video Gallery
-                </a>
-
-                <span class="vshow-breadcrumb__sep">&#8250;</span>
-
-                <a href="{{ route('video-gallery.year', $year) }}" class="vshow-breadcrumb__link">
-                    <i class="fas fa-calendar-alt"></i>
-                    {{ $year }}
-                </a>
-
-                <span class="vshow-breadcrumb__sep">&#8250;</span>
-
-                <span class="vshow-breadcrumb__current">
-                    <i class="fas fa-play-circle"></i>
-                    {{ Str::limit($gallery->title, 35) }}
-                </span>
-
-            </div>
-        </nav>
-
-        {{-- Bordered heading box --}}
+        <div class="vshow-breadcrumb">
+            <a href="{{ route('index') }}">Home</a>
+            <span class="mx-2">›</span>
+            <a href="{{ route('video-gallery.index') }}">Video Gallery</a>
+            <span class="mx-2">›</span>
+            <a href="{{ route('video-gallery.year', $year) }}">{{ $year }}</a>
+            <span class="mx-2">›</span>
+            <span>{{ Str::limit($gallery->title, 40) }}</span>
+        </div>
         <div class="vshow-hero__head">
             <span class="vshow-hero__label">Video Gallery</span>
             <h1 class="vshow-hero__title">{{ $gallery->title }}</h1>
             @if($gallery->description)
-            <div class="vshow-hero__sub">{{ $gallery->description }}</div>
+            <p class="vshow-hero__sub">{{ $gallery->description }}</p>
             @endif
         </div>
-
     </div>
 </section>
 

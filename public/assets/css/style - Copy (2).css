@@ -3928,22 +3928,14 @@ select:focus-visible {
     border-radius: 2px;
 }
 
-/* Description text — gold left-bar badge (consistent with video gallery pages) */
+/* Description text */
 .sh-desc {
-    display: inline-block;
     font-family: 'Inter', 'DM Sans', sans-serif;
     font-size: 0.95rem;
-    color: #444;
+    color: #6C757D;
     margin: 0;
-    line-height: 1.65;
+    line-height: 1.7;
     max-width: 560px;
-    padding: 9px 22px;
-    background: #FDF9F2;
-    border: none !important;
-    border-left: 3px solid #D4A017 !important;
-    outline: none !important;
-    border-radius: 0 6px 6px 0;
-    letter-spacing: .01em;
 }
 
 /* Section header centering */
@@ -3965,16 +3957,18 @@ select:focus-visible {
 .past-events-section .sh-box {
     border-color: #1A1A2E;
 }
-.past-events-section .sh-desc { color: #444; }
+.past-events-section .sh-desc {
+    color: #6C757D;
+}
 
 /* Artists section — sh-box on light bg (artists is now #F8F9FA) */
 .artists .sh-subtitle { color: #D4A017 !important; }
 .artists .sh-title    { color: #C8102E !important; }
-.artists .sh-desc     { color: #444 !important; }
+.artists .sh-desc     { color: #6C757D !important; }
 .artists .sh-bar      { background: linear-gradient(90deg, #D4A017, #F0C040, #D4A017) !important; }
 
 /* Contact section */
-.contact .sh-desc { color: #444; }
+.contact .sh-desc { color: #6C757D; }
 
 /* Events section */
-.events .sh-desc { color: #444; }
+.events .sh-desc { color: #6C757D; }
