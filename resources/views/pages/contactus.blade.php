@@ -9,7 +9,7 @@
     </div> --}}
 
     <!-- About Us Info Section -->
-    @include('partials.hero')
+    {{-- @include('partials.hero') --}}
     @include('partials.contactus')
 
 

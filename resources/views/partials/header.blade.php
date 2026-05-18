@@ -549,7 +549,7 @@
 
                             <li>
                                 <a href="{{ route('pastevents') }}"
-                                   class="nav-link {{ request()->routeIs('pastevents') ? 'active' : '' }}">
+                                   class="nav-link {{ request()->routeIs('pastevents') || request()->is('shows/*') ? 'active' : '' }}">
                                     Past Events
                                 </a>
                             </li>

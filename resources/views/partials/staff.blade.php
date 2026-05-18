@@ -73,7 +73,7 @@
             {{-- ─── Uzma Abbas ───────────────────────────────── --}}
             <div class="tm-card">
                 <div class="tm-card__img-wrap">
-                    <img src="{{ asset('assets/images/team/uzmaabbas.png') }}"
+                    <img src="{{ asset('assets/images/team/uzmaabbas.jpg') }}"
                          alt="Uzma Abbas" loading="lazy" />
                     <div class="tm-card__overlay">
                         <span class="tm-card__overlay-role">COO</span>

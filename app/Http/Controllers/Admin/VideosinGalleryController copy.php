@@ -13,30 +13,13 @@ class VideosinGalleryController extends Controller
 {
     public function index(Request $request)
 {
-    $search        = trim($request->get('search', ''));
-    $galleryFilter = trim($request->get('gallery_id', ''));
-
-    $videos = VideosinGallery::with('videoGallery')
-        ->when($search, function ($query) use ($search) {
-            $query->where(function($q) use ($search) {
-                $q->where('description', 'like', '%' . $search . '%')
-                  ->orWhere('youtubelink', 'like', '%' . $search . '%')
-                  ->orWhereHas('videoGallery', function($gq) use ($search) {
-                      $gq->where('title', 'like', '%' . $search . '%');
-                  });
-            });
-        })
-        ->when($galleryFilter, function ($query) use ($galleryFilter) {
-            $query->where('video_gallery_id', $galleryFilter);
+    $videos = VideosinGallery::when($request->search, function ($query) use ($request) {
+            return $query->where('description', 'like', '%' . $request->search . '%');
         })
         ->orderBy('display_order')
-        ->paginate(12)
-        ->withQueryString();
+        ->paginate(12);
 
-    // For gallery dropdown
-    $galleries = VideoGallery::where('is_active', true)->orderBy('title')->get();
-
-    return view('admin.videos_in_gallery.index', compact('videos', 'search', 'galleryFilter', 'galleries'));
+    return view('admin.videos_in_gallery.index', compact('videos'));
 }
 
     public function create()

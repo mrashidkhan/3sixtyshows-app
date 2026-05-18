@@ -93,14 +93,18 @@
           <div class="footer-section">
             <h3>Follow Us</h3>
             <div class="footer-social">
-              <a href="https://www.facebook.com/profile.php?id=61587301180302"
+              <a href="https://www.facebook.com/3SixtyShows/"
                  target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <i class="fab fa-facebook-f"></i>
               </a>
-              <a href="https://www.instagram.com/opaltickets/"
+              <a href="https://www.instagram.com/3sixtyshows/"
                  target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <i class="fab fa-instagram"></i>
               </a>
+              <a href="https://www.youtube.com/@3sixtyShowsDallas"
+   target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+  <i class="fab fa-youtube"></i>
+</a>
             </div>
           </div>
 
